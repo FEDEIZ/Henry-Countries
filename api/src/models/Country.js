@@ -11,18 +11,16 @@ module.exports = (sequelize) => {
         allowNull: false,
         primaryKey: true,
         set(value) {
-          if(value) this.setDataValue("id", value.toUpperCase());
+          if (value) this.setDataValue("id", value.toUpperCase());
         },
-        
       },
       name: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING,
         allowNull: false,
         set(value) {
-          if(value)  this.setDataValue("name", value.toUpperCase());
+          if (value) this.setDataValue("name", value.toUpperCase());
         },
         unique: true,
-        
       },
       flagImg: {
         type: DataTypes.STRING,
@@ -33,27 +31,27 @@ module.exports = (sequelize) => {
         unique: true,
       },
       continent: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING,
         allowNull: false,
-        
+
         set(value) {
-          if(value) this.setDataValue("continent", value.toUpperCase());
+          if (value) this.setDataValue("continent", value.toUpperCase());
         },
       },
       capital: {
-        type: DataTypes.STRING(20),
+        type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
-        
+        defaultValue: "NONE",
+
         set(value) {
-          if(value) this.setDataValue("capital", value.toUpperCase());
+          if (value) this.setDataValue("capital", value.toUpperCase());
         },
       },
       subregion: {
-        type: DataTypes.STRING(20),
-        
+        type: DataTypes.STRING,
+
         set(value) {
-          if(value) this.setDataValue("subregion", value.toUpperCase());
+          if (value) this.setDataValue("subregion", value.toUpperCase());
         },
       },
       area: {
