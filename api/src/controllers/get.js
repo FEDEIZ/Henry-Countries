@@ -1,9 +1,9 @@
 const axios = require("axios");
-const { Country } = require("../../db");
+const { Country } = require("../db");
 require("dotenv").config();
 const { API_URL } = process.env;
 
-module.exports = async (req, res) => {
+const getCountries = async (req, res) => {
   console.log("Estoy en GET");
   const countriesJSON = [];
   try {
@@ -37,3 +37,9 @@ module.exports = async (req, res) => {
     res.send(err.message);
   }
 };
+
+const getCountryById = async (req, res) => {};
+
+const getCountriesByName = async (req, res) => {};
+
+module.exports = { getCountries, getCountryById, getCountriesByName };
