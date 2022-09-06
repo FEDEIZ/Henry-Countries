@@ -1,13 +1,18 @@
-const { Router } = require("express");
+const { Router, json } = require("express");
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
-const countriesMidd = require("../middlewares/countries.js");
-const activitiesMidd = require("../middlewares/activities.js");
+const {
+  getCountries,
+  getCountriesByName,
+  getCountryById,
+} = require("../controllers/get.js");
+
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
+router.use(json());
 
-router.use("/countries", countriesMidd);
+router.get("/countries", getCountries);
 
 module.exports = router;
