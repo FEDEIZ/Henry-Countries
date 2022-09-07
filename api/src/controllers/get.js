@@ -1,45 +1,42 @@
-const axios = require("axios");
-const { Country } = require("../db");
-require("dotenv").config();
-const { API_URL } = process.env;
+const { Country, Activity } = require("../db");
+const { Sequelize } = require("sequelize");
+const Op = Sequelize.Op;
 
 const getCountries = async (req, res) => {
-  console.log("Estoy en GET");
-  const countriesJSON = [];
+  const { name } = req.query;
+
   try {
-    const countries = await axios.get(`${API_URL}/all`);
-    await countries.data.forEach((c) => {
-      Country.upsert({
-        id: c.cca3,
-        name: c.name.common,
-        flagImg: c.flags[0],
-        continent: c.region,
-        capital: c.capital ? c.capital[0] : "NONE",
-        subregion: c.subregion,
-        area: c.area,
-        population: c.population,
+    if (!name) {
+      const allCountries = await Country.findAll();
+      res.json(allCountries);
+    } else {
+      const countriesName = await Country.findAll({
+        where: {
+          name: { [Op.iLike]: `%${name}%` },
+        },
+        include: Activity,
       });
-    });
-    countries.data.forEach((c) => {
-      countriesJSON.push({
-        id: c.cca3,
-        name: c.name.common,
-        flagImg: c.flags[0],
-        continent: c.region,
-        capital: c.capital ? c.capital[0] : "NONE",
-        subregion: c.subregion,
-        area: c.area,
-        population: c.population,
-      });
-    });
-    res.json(countriesJSON);
+      //console.log(countriesName);
+      res.json(countriesName);
+    }
+    //console.log(allCountries);
   } catch (err) {
     res.send(err.message);
   }
 };
 
-const getCountryById = async (req, res) => {};
+const getCountryById = async (req, res) => {
+  const { idCountry } = req.params;
+  try {
+    const countryFound = await Country.findOne({
+      where: { id: idCountry },
+      include: Activity,
+    });
+    res.json(countryFound);
+  } catch (err) {
+    console.log(err.message);
+    res.status(400).send(err.message);
+  }
+};
 
-const getCountriesByName = async (req, res) => {};
-
-module.exports = { getCountries, getCountryById, getCountriesByName };
+module.exports = { getCountries, getCountryById };
