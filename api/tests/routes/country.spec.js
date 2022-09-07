@@ -9,8 +9,8 @@ const country = {
   name: 'Argentina',
 };
 
-describe('Country routes', () => {
-  before(() => conn.authenticate()
+xdescribe('Country routes', () => {
+  beforeAll(() => conn.authenticate()
   .catch((err) => {
     console.error('Unable to connect to the database:', err);
   }));
