@@ -20,6 +20,7 @@ module.exports = async () => {
       });
     });
     console.log("DB LOADED SUCCESSFULLY!");
+    return countries.data;
   } catch (err) {
     res.send(err.message);
   }
