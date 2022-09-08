@@ -102,20 +102,20 @@ export function orderByPopDesc() {
   };
 }
 
-export function filterByActivityType(activityType) {
+export function filterByActivities(activitiesName) {
   return function (dispatch) {
     return dispatch({
       type: FILTER_BY_ACTIVITY_NAME,
-      payload: activityType,
+      payload: activitiesName,
     });
   };
 }
 
-export function filterByContinent(continent) {
+export function filterByContinents(continents) {
   return function (dispatch) {
     return dispatch({
       type: FILTER_BY_CONTINENT,
-      payload: continent,
+      payload: continents,
     });
   };
 }

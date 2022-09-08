@@ -10,7 +10,8 @@ import {
   SEARCH_BY_NAME,
 } from "../actions/actionTypes.js";
 
-import { countriesByActivity } from "./countriesByActivity.js";
+import { countriesByActivity, countriesByContinents } from "./filterBy.js";
+import orderBy from "./orderBy.js";
 
 const initialState = {
   countries: [],
@@ -32,44 +33,38 @@ function rootReducer(state = initialState, action) {
     case FILTER_BY_CONTINENT:
       return {
         ...state,
-        countries: countries.filter(
-          (country) => country.continent === action.payload.toUpperCase()
-        ),
+        countries: countriesByContinents(countries, action.payload),
       };
     case FILTER_BY_ACTIVITY_NAME:
       return {
         ...state,
-        countries: countriesByActivity(action.payload, countries),
+        countries: countriesByActivity(countries, action.payload),
       };
     case ORDER_BY_ALPHA_ASC:
       return {
         ...state,
-        countries: [...action.payload],
+        countries: orderBy("ASC", countries, "name"),
       };
     case ORDER_BY_ALPHA_DESC:
       return {
         ...state,
-        countries: [...action.payload],
+        countries: orderBy("DESC", countries, "name"),
       };
     case ORDER_BY_POP_ASC:
       return {
         ...state,
-        countries: [...action.payload],
+        countries: orderBy("ASC", countries, "population"),
       };
     case ORDER_BY_POP_DESC:
       return {
         ...state,
-        countries: [...action.payload],
+        countries: orderBy("DESC", countries, "population"),
       };
     case SEARCH_BY_NAME:
       return {
         ...state,
         countries: [...action.payload],
       };
-    // case SHOW_FORM_ACTIVITY:
-    //   return {
-    //     ...state,
-    //   };
     default:
       return state;
   }
