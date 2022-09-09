@@ -1,41 +1,23 @@
-import React from "react";
-import { connect } from "react-redux";
+import Countries from "../Countries/Countries.js";
+import React, { useEffect } from "react";
 import { getCountries } from "../../actions";
-import { Link } from "react-router-dom";
-class Main extends React.Component {
-  // componentDidMount() {
-  //   const movieId = this.props.match.params.id;
-  //   console.log(this.props);
-  //   this.props.getMovieDetails(movieId);
-  //   console.log(this.props);
-  // }
+import { useDispatch } from "react-redux";
+//import Nav from "../Nav/Nav.jsx";
+export function Main() {
+  const dispatch = useDispatch();
 
-  render() {
-    return (
-      <div className="Main">
-        <h1>Henry Countries</h1>
-        <ul>
-          {this.props.countries?.map((country) => {
-            return (
-              <div key={country.id}>
-                <Link to={`/movie/${country.id}`}>{country.name}</Link>
-                {/* <button
-                  onClick={() => this.props.removeMovieFavorite(movie.imdbID)}
-                >
-                  X
-                </button> */}
-              </div>
-            );
-          })}
-        </ul>
+  useEffect(() => {
+    dispatch(getCountries());
+  }, [dispatch]);
+
+
+  return (
+    
+      <div>
+        <Countries />
       </div>
-    );
-  }
-}
-function mapStateToProps(state) {
-  return {
-    countries: state.countries,
-  };
+    
+  );
 }
 
-export default connect(mapStateToProps, { getCountries })(Main);
+export default Main;
