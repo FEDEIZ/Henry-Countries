@@ -10,11 +10,11 @@ import {
   SEARCH_BY_NAME,
 } from "./actionTypes.js";
 
+import axios from "axios";
+
 require("dotenv").config();
 const { API_URL } = process.env;
 console.log(API_URL);
-
-import axios from "axios";
 
 export function getCountries() {
   return async function (dispatch) {

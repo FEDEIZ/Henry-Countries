@@ -33,32 +33,32 @@ function rootReducer(state = initialState, action) {
     case FILTER_BY_CONTINENT:
       return {
         ...state,
-        countries: countriesByContinents(countries, action.payload),
+        countries: countriesByContinents(this.countries, action.payload),
       };
     case FILTER_BY_ACTIVITY_NAME:
       return {
         ...state,
-        countries: countriesByActivity(countries, action.payload),
+        countries: countriesByActivity(this.countries, action.payload),
       };
     case ORDER_BY_ALPHA_ASC:
       return {
         ...state,
-        countries: orderBy("ASC", countries, "name"),
+        countries: orderBy("ASC", this.countries, "name"),
       };
     case ORDER_BY_ALPHA_DESC:
       return {
         ...state,
-        countries: orderBy("DESC", countries, "name"),
+        countries: orderBy("DESC", this.countries, "name"),
       };
     case ORDER_BY_POP_ASC:
       return {
         ...state,
-        countries: orderBy("ASC", countries, "population"),
+        countries: orderBy("ASC", this.countries, "population"),
       };
     case ORDER_BY_POP_DESC:
       return {
         ...state,
-        countries: orderBy("DESC", countries, "population"),
+        countries: orderBy("DESC", this.countries, "population"),
       };
     case SEARCH_BY_NAME:
       return {
