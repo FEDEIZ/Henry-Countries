@@ -12,14 +12,15 @@ import {
 
 import axios from "axios";
 
-require("dotenv").config();
-const { API_URL } = process.env;
-console.log(API_URL);
+// require("dotenv").config();
+// console.log(process.env);
+// const { API_URL } = process.env;
+// console.log(API_URL);
 
 export function getCountries() {
   return async function (dispatch) {
     try {
-      const countries = await axios(`${API_URL}/countries`);
+      const countries = await axios(`http://localhost:3001/countries`);
       return dispatch({
         type: GET_COUNTRIES,
         payload: countries.data,
