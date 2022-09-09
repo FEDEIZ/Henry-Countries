@@ -1,36 +1,39 @@
-import React from "react";
-import { connect } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 import { getCountryDetail } from "../../actions";
 
-//import "./.css";
 
-class Country extends React.Component {
-  componentDidMount() {
-    const countryId = this.props.match.params.id;
-    //console.log(this.props);
-    this.props.getCountryDetail(countryId);
-    //console.log(this.props);
-  }
 
-  render() {
-    return (
-      <div className="country-detail">
-        Country Details
-        <h2>{this.props.countryDetail.id}</h2>
-        <img src={this.props.countryDetail.flag} alt="img not found" />
-        <h4>{`Capital: ${this.props.countryDetail.capital}`}</h4>
-        <h4>{`Subregion: ${this.props.countryDetail.subregion}`}</h4>
-        <h4>{`Area: ${this.props.countryDetail.area}`}</h4>
-        <h4>{`Population: ${this.props.countryDetail.population}`}</h4>
+const CountryDetails = () => {
+  const countryDetail = useSelector((state) => state.countryDetail);
+  const dispatch = useDispatch();
+
+  let { id } = useParams();
+  console.log(id);
+  useEffect(() => {
+    dispatch(getCountryDetail(id));
+  }, id);
+ 
+ console.log(countryDetail, "COUNTRY DETAIL")
+
+  return (
+    <div>
+      <div>
+        <h1>{countryDetail.name}</h1>
+        <h3>{countryDetail.id}</h3>
+        <div>
+          <img src={countryDetail.flagImg} alt="No img" />
+        </div>
+        <h4>Region: {countryDetail.region}</h4>
+        <h5>Subregion: {countryDetail.subregion}</h5>
+        <h5>Capital: {countryDetail.capital}</h5>
+        <h5>Area: {countryDetail.area} Km2</h5>
+        <h5>Population: {countryDetail.population} Hab. </h5>
       </div>
-    );
-  }
-}
+      
+    </div>
+  );
+};
+export default CountryDetails;
 
-function mapStateToProps(state) {
-  return {
-    countryDetail: state.countryDetail,
-  };
-}
-
-export default connect(mapStateToProps, { getCountryDetail })(Country);
