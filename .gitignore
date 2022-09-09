@@ -106,5 +106,8 @@ dist
 # package-lock.json
 package-lock.json
 
+#build file
+build/
+
 #auxilir files
 auxFiles/
