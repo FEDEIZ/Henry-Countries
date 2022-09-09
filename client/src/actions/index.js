@@ -12,15 +12,15 @@ import {
 
 import axios from "axios";
 
-// require("dotenv").config();
-// console.log(process.env);
-// const { API_URL } = process.env;
-// console.log(API_URL);
+require("dotenv").config();
+console.log(process.env);
+const { REACT_APP_API_URL } = process.env;
+console.log(REACT_APP_API_URL);
 
 export function getCountries() {
   return async function (dispatch) {
     try {
-      const countries = await axios(`http://localhost:3001/countries`);
+      const countries = await axios(`${REACT_APP_API_URL}/countries`);
       return dispatch({
         type: GET_COUNTRIES,
         payload: countries.data,
@@ -38,7 +38,7 @@ export function getCountries() {
 export function getCountryDetail(id) {
   return async function (dispatch) {
     try {
-      const country = await axios(`${API_URL}/countries/:${id}`);
+      const country = await axios(`${REACT_APP_API_URL}/countries/:${id}`);
       return dispatch({
         type: GET_COUNTRY_DETAILS,
         payload: country.data,
@@ -56,7 +56,7 @@ export function getCountryDetail(id) {
 export function searchByName(name) {
   return async function (dispatch) {
     try {
-      const countries = await axios(`${API_URL}/countries?name=${name}`);
+      const countries = await axios(`${REACT_APP_API_URL}/countries?name=${name}`);
       return dispatch({
         type: SEARCH_BY_NAME,
         payload: countries.data,
