@@ -11,7 +11,7 @@ module.exports = async () => {
       Country.upsert({
         id: c.cca3,
         name: c.name.common,
-        flagImg: c.flags[0],
+        flagImg: c.flags[1],
         continent: c.region,
         capital: c.capital ? c.capital[0] : "NONE",
         subregion: c.subregion,
