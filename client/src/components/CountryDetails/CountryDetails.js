@@ -1,21 +1,22 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getCountryDetail } from "../../actions";
-
+import { Link } from "react-router-dom";
 
 
 const CountryDetails = () => {
-  const countryDetail = useSelector((state) => state.countryDetail);
+  
   const dispatch = useDispatch();
 
   let { id } = useParams();
-  console.log(id);
+
   useEffect(() => {
-    dispatch(getCountryDetail(id));
-  }, id);
- 
- console.log(countryDetail, "COUNTRY DETAIL")
+    dispatch(getCountryDetail(id))
+  },[dispatch]);
+
+ const countryDetail = useSelector((state) => state.countryDetail);
+
 
   return (
     <div>
@@ -25,11 +26,24 @@ const CountryDetails = () => {
         <div>
           <img src={countryDetail.flagImg} alt="No img" />
         </div>
-        <h4>Region: {countryDetail.region}</h4>
-        <h5>Subregion: {countryDetail.subregion}</h5>
+        <h4>continent: {countryDetail.continent}</h4>
         <h5>Capital: {countryDetail.capital}</h5>
         <h5>Area: {countryDetail.area} Km2</h5>
         <h5>Population: {countryDetail.population} Hab. </h5>
+        <div>
+          {countryDetail['activities'] && countryDetail['activities'].length ? 
+            countryDetail['activities'].map(activities => 
+
+              <div key={activities.name}>
+                {activities.name}
+              </div>
+            )
+            : <h3>No activities</h3>
+          }
+        </div>
+        <Link to={`/activities?id=${id}`}>
+          <h4>Add or modify activity</h4>
+        </Link>  
       </div>
       
     </div>
