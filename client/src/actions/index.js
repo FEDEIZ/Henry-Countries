@@ -13,9 +13,9 @@ import {
 import axios from "axios";
 
 require("dotenv").config();
-console.log(process.env);
+// console.log(process.env);
 const { REACT_APP_API_URL } = process.env;
-console.log(REACT_APP_API_URL);
+// console.log(REACT_APP_API_URL);
 
 export function getCountries() {
   return async function (dispatch) {
@@ -38,7 +38,7 @@ export function getCountries() {
 export function getCountryDetail(id) {
   return async function (dispatch) {
     try {
-      const country = await axios(`${REACT_APP_API_URL}/countries/:${id}`);
+      const country = await axios(`${REACT_APP_API_URL}/countries/${id}`);
       return dispatch({
         type: GET_COUNTRY_DETAILS,
         payload: country.data,
