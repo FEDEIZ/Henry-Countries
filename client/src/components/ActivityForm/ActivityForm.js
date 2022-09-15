@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountryDetail, getCountries } from "./../../actions";
+import { getCountries } from "./../../actions";
 import Form from "./Form";
 
 const ActivityForm = () => {
@@ -8,24 +8,30 @@ const ActivityForm = () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const countries = useSelector((state) => state.countries);
-  const countryDetail = useSelector((state) => state.countryDetail);
-
   const [formState, setFormState] = useState({
     name: "",
     difficulty: "",
     days: "",
     hours: "",
     season: "",
-    countriesId: id ? [countryDetail.id] : [],
+    countriesId: id ? [id] : [],
     countriesAdded: [],
     countrySelected: "",
   });
-
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    dispatch(getCountries());
-  }, []);
+    if (!countries.length) dispatch(getCountries());
+  });
+
+  useEffect(() => {
+    if (countries.length)
+      setFormState({
+        ...formState,
+        countriesAdded:
+          countries.length && id ? [countries.find((c) => c.id === id)] : [],
+      });
+  }, [countries]);
 
   const selectedChange = (e) => {
     e.preventDefault();
@@ -126,6 +132,7 @@ const ActivityForm = () => {
       return true;
   };
 
+  console.log(formState);
   return (
     <div>
       <Form
