@@ -19,19 +19,17 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM("1", "2", "3", "4", "5"),
       },
       duration: {
-        type: DataTypes.ARRAY(DataTypes.SMALLINT), // [day, hours, minutes]
+        type: DataTypes.ARRAY(DataTypes.SMALLINT), // [day, hours]
         validate: {
           length(value) {
-            if (value.length !== 3) {
-              throw new Error(
-                "duration must only have days, hours and minutes"
-              );
+            if (value.length !== 2) {
+              throw new Error("duration must only have days and hours");
             }
           },
         },
       },
       season: {
-        type: DataTypes.ENUM("SPRING", "SUMMER", "FALL", "WINTER"),
+        type: DataTypes.ENUM("SPRING", "SUMMER", "AUTUMN", "WINTER"),
       },
     },
     { timestamps: false }
