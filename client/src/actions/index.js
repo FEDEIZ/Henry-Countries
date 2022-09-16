@@ -2,6 +2,7 @@ import {
   FILTER_BY_ACTIVITY_NAME,
   FILTER_BY_CONTINENT,
   GET_COUNTRIES,
+  GET_COUNTRIES_ACTIVITIES,
   GET_COUNTRY_DETAILS,
   ORDER_BY_ALPHA_ASC,
   ORDER_BY_ALPHA_DESC,
@@ -9,7 +10,7 @@ import {
   ORDER_BY_POP_DESC,
   SEARCH_BY_NAME,
 } from "./actionTypes.js";
-
+import orderBy from "../reducer/orderBy";
 import axios from "axios";
 
 require("dotenv").config();
@@ -20,10 +21,11 @@ const { REACT_APP_API_URL } = process.env;
 export function getCountries() {
   return async function (dispatch) {
     try {
-      const countries = await axios(`${REACT_APP_API_URL}/countries`);
+      const countriesAxios = await axios(`${REACT_APP_API_URL}/countries`);
+      const countries = orderBy("ASC", countriesAxios.data, "name");
       return dispatch({
         type: GET_COUNTRIES,
-        payload: countries.data,
+        payload: countries,
       });
     } catch (err) {
       console.log(err.message);
@@ -47,6 +49,26 @@ export function getCountryDetail(id) {
       console.log(err.message);
       return dispatch({
         type: GET_COUNTRY_DETAILS,
+        payload: err.message,
+      });
+    }
+  };
+}
+
+export function getCountriesActivities() {
+  return async function (dispatch) {
+    try {
+      const countriesActivities = await axios(
+        `${REACT_APP_API_URL}/countries/activities`
+      );
+      return dispatch({
+        type: GET_COUNTRIES_ACTIVITIES,
+        payload: countriesActivities.data,
+      });
+    } catch (err) {
+      console.log(err.messaje);
+      return dispatch({
+        type: GET_COUNTRIES_ACTIVITIES,
         payload: err.message,
       });
     }

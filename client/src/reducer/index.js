@@ -8,6 +8,7 @@ import {
   ORDER_BY_POP_ASC,
   ORDER_BY_POP_DESC,
   SEARCH_BY_NAME,
+  GET_COUNTRIES_ACTIVITIES,
 } from "../actions/actionTypes.js";
 
 import { countriesByActivity, countriesByContinents } from "./filterBy.js";
@@ -16,6 +17,7 @@ import orderBy from "./orderBy.js";
 const initialState = {
   countries: [],
   countryDetail: {},
+  countriesActivities: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -30,6 +32,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         countryDetail: action.payload,
       };
+    case GET_COUNTRIES_ACTIVITIES:
+      return {
+        ...state,
+        countriesActivities: [...action.payload],
+      };
     case FILTER_BY_CONTINENT:
       return {
         ...state,
@@ -38,7 +45,10 @@ function rootReducer(state = initialState, action) {
     case FILTER_BY_ACTIVITY_NAME:
       return {
         ...state,
-        countries: countriesByActivity(state.countries, action.payload),
+        countriesActivities: countriesByActivity(
+          state.countriesActivities,
+          action.payload
+        ),
       };
     case ORDER_BY_ALPHA_ASC:
       return {
