@@ -39,4 +39,20 @@ const getCountryById = async (req, res) => {
   }
 };
 
-module.exports = { getCountries, getCountryById };
+const getCountriesActivities = async (req, res) => {
+  try {
+    console.log("hola");
+    const countries = await Country.findAll({
+      include: Activity,
+      required: true,
+    });
+    const countriesActivities = countries.filter((c) => c.activities.length);
+    console.log(countriesActivities);
+    res.json(countriesActivities);
+  } catch (err) {
+    console.log(err.message);
+    res.status(400).send(err.message);
+  }
+};
+
+module.exports = { getCountries, getCountryById, getCountriesActivities };
