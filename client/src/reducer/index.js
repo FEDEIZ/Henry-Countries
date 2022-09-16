@@ -18,6 +18,8 @@ const initialState = {
   countries: [],
   countryDetail: {},
   countriesActivities: [],
+  countriesOrder: [],
+  countriesFilter: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -40,12 +42,12 @@ function rootReducer(state = initialState, action) {
     case FILTER_BY_CONTINENT:
       return {
         ...state,
-        countries: countriesByContinents(state.countries, action.payload),
+        countriesFilter: countriesByContinents(state.countries, action.payload),
       };
     case FILTER_BY_ACTIVITY_NAME:
       return {
         ...state,
-        countriesActivities: countriesByActivity(
+        countriesFilter: countriesByActivity(
           state.countriesActivities,
           action.payload
         ),
@@ -53,22 +55,22 @@ function rootReducer(state = initialState, action) {
     case ORDER_BY_ALPHA_ASC:
       return {
         ...state,
-        countries: orderBy("ASC", state.countries, "name"),
+        countriesOrder: orderBy("ASC", state.countries, "name"),
       };
     case ORDER_BY_ALPHA_DESC:
       return {
         ...state,
-        countries: orderBy("DESC", state.countries, "name"),
+        countriesOrder: orderBy("DESC", state.countries, "name"),
       };
     case ORDER_BY_POP_ASC:
       return {
         ...state,
-        countries: orderBy("ASC", state.countries, "population"),
+        countriesOrder: orderBy("ASC", state.countries, "population"),
       };
     case ORDER_BY_POP_DESC:
       return {
         ...state,
-        countries: orderBy("DESC", state.countries, "population"),
+        countriesOrder: orderBy("DESC", state.countries, "population"),
       };
     case SEARCH_BY_NAME:
       return {

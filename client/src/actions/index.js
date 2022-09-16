@@ -10,22 +10,19 @@ import {
   ORDER_BY_POP_DESC,
   SEARCH_BY_NAME,
 } from "./actionTypes.js";
-import orderBy from "../reducer/orderBy";
 import axios from "axios";
 
 require("dotenv").config();
-// console.log(process.env);
+
 const { REACT_APP_API_URL } = process.env;
-// console.log(REACT_APP_API_URL);
 
 export function getCountries() {
   return async function (dispatch) {
     try {
-      const countriesAxios = await axios(`${REACT_APP_API_URL}/countries`);
-      const countries = orderBy("ASC", countriesAxios.data, "name");
+      const countries = await axios(`${REACT_APP_API_URL}/countries`);
       return dispatch({
         type: GET_COUNTRIES,
-        payload: countries,
+        payload: countries.data,
       });
     } catch (err) {
       console.log(err.message);
@@ -119,7 +116,7 @@ export function orderByAlphaAsc() {
 }
 
 export function orderByAlphaDesc() {
-  return function (dispatch) {
+  return async function (dispatch) {
     return dispatch({
       type: ORDER_BY_ALPHA_DESC,
     });
