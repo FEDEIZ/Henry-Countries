@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries } from "./../../actions";
+import { getCountries, postActivity } from "./../../actions";
 import Form from "./Form";
 
 const ActivityForm = () => {
@@ -132,6 +132,18 @@ const ActivityForm = () => {
       return true;
   };
 
+  const handleSumbit = () => {
+    formState.countriesId.forEach((c) => {
+      let activity = {
+        name: formState.name,
+        difficulty: formState.difficulty,
+        duration: [parseInt(formState.days), parseInt(formState.hours)],
+        season: formState.season.toUpperCase(),
+        countryId: c,
+      };
+      dispatch(postActivity(activity));
+    });
+  };
   console.log(formState);
   return (
     <div>
@@ -144,6 +156,7 @@ const ActivityForm = () => {
         addCountry={addCountry}
         removeCountry={removeCountry}
         enableSubmit={enableSubmit}
+        handleSumbit={handleSumbit}
       />
     </div>
   );

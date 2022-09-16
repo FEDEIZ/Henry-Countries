@@ -9,6 +9,7 @@ const Form = ({
   addCountry,
   removeCountry,
   enableSubmit,
+  handleSumbit,
 }) => {
   return (
     <div>
@@ -136,6 +137,7 @@ const Form = ({
             type="submit"
             value="Add activity"
             disabled={enableSubmit(formState)}
+            onClick={handleSumbit}
           />
         </div>
       </form>

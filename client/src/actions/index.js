@@ -56,7 +56,9 @@ export function getCountryDetail(id) {
 export function searchByName(name) {
   return async function (dispatch) {
     try {
-      const countries = await axios(`${REACT_APP_API_URL}/countries?name=${name}`);
+      const countries = await axios(
+        `${REACT_APP_API_URL}/countries?name=${name}`
+      );
       return dispatch({
         type: SEARCH_BY_NAME,
         payload: countries.data,
@@ -67,6 +69,21 @@ export function searchByName(name) {
         type: SEARCH_BY_NAME,
         payload: err.message,
       });
+    }
+  };
+}
+
+export function postActivity(activity) {
+  return async function () {
+    try {
+      console.log("Posting activity: " + activity);
+      const newActivity = await axios.post(
+        `${REACT_APP_API_URL}/activities`,
+        activity
+      );
+      console.log(newActivity);
+    } catch (err) {
+      console.log(err.message);
     }
   };
 }
