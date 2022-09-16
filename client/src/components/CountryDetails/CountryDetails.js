@@ -5,15 +5,14 @@ import { getCountryDetail } from "../../actions";
 import { Link } from "react-router-dom";
 
 const CountryDetails = () => {
+  const countryDetail = useSelector((state) => state.countryDetail);
   const dispatch = useDispatch();
 
   let { id } = useParams();
 
   useEffect(() => {
-    dispatch(getCountryDetail(id));
+    if (countryDetail.id !== id) dispatch(getCountryDetail(id));
   }, [dispatch]);
-
-  const countryDetail = useSelector((state) => state.countryDetail);
 
   return (
     <div>
