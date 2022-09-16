@@ -7,7 +7,7 @@ const postActivity = async (req, res) => {
       where: {
         name: name,
         difficulty: difficulty,
-        //duration: duration,
+        duration: duration,
         season: season,
       },
     });
