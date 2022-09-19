@@ -18,8 +18,8 @@ const initialState = {
   countries: [],
   countryDetail: {},
   countriesActivities: [],
-  countriesOrder: [],
-  countriesFilter: [],
+  countriesResults: [],
+  countriesResultsFlag: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -27,7 +27,8 @@ function rootReducer(state = initialState, action) {
     case GET_COUNTRIES:
       return {
         ...state,
-        countries: [...action.payload],
+        countries: action.payload,
+        countriesResults: action.payload,
       };
     case GET_COUNTRY_DETAILS:
       return {
@@ -42,12 +43,15 @@ function rootReducer(state = initialState, action) {
     case FILTER_BY_CONTINENT:
       return {
         ...state,
-        countriesFilter: countriesByContinents(state.countries, action.payload),
+        countriesResults: countriesByContinents(
+          state.countriesResults,
+          action.payload
+        ),
       };
     case FILTER_BY_ACTIVITY_NAME:
       return {
         ...state,
-        countriesFilter: countriesByActivity(
+        countriesResults: countriesByActivity(
           state.countriesActivities,
           action.payload
         ),
@@ -55,27 +59,31 @@ function rootReducer(state = initialState, action) {
     case ORDER_BY_ALPHA_ASC:
       return {
         ...state,
-        countriesOrder: orderBy("ASC", state.countries, "name"),
+        countriesResults: orderBy("ASC", state.countriesResults, "name"),
+        countriesResultsFlag: !state.countriesResultsFlag,
       };
     case ORDER_BY_ALPHA_DESC:
       return {
         ...state,
-        countriesOrder: orderBy("DESC", state.countries, "name"),
+        countriesResults: orderBy("DESC", state.countriesResults, "name"),
+        countriesResultsFlag: !state.countriesResultsFlag,
       };
     case ORDER_BY_POP_ASC:
       return {
         ...state,
-        countriesOrder: orderBy("ASC", state.countries, "population"),
+        countriesResults: orderBy("ASC", state.countriesResults, "population"),
+        countriesResultsFlag: !state.countriesResultsFlag,
       };
     case ORDER_BY_POP_DESC:
       return {
         ...state,
-        countriesOrder: orderBy("DESC", state.countries, "population"),
+        countriesResults: orderBy("DESC", state.countriesResults, "population"),
+        countriesResultsFlag: !state.countriesResultsFlag,
       };
     case SEARCH_BY_NAME:
       return {
         ...state,
-        countries: [...action.payload],
+        countriesResults: action.payload,
       };
     default:
       return state;
