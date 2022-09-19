@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import Country from "./Country";
 
 const Countries = ({ countries }) => {
-  useSelector((state) => state.countriesResultsFlag);
+  //useSelector((state) => state.countriesResultsFlag);
+  useSelector((state) => state.order);
+  useSelector((state) => state.countriesResults.length);
 
-  return Array.isArray(countries) ? (
-    countries.length ? (
+  return countries.length ? (
       <div>
         {countries.map((c) => (
           <Link key={c.id} to={`/countries/${c.id}`}>
@@ -15,9 +16,7 @@ const Countries = ({ countries }) => {
           </Link>
         ))}
       </div>
-    ) : (
-      <h4>Loading countries</h4>
-    )
+    
   ) : (
     <h4>No country found</h4>
   );

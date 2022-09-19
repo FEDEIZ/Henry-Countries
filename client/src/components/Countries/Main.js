@@ -12,12 +12,33 @@ import {
   filterByContinents,
   searchByName,
 } from "./../../actions";
+
+import {
+  ACTIVITY_FILTER, ALPHA_ASC,
+  ALPHA_DESC, CONTINENT_FILTER, POP_ASC, POP_DESC
+  } from "../../actions/stateTypes.js";
 export function Main() {
   const countriesResults = useSelector((state) => state.countriesResults);
+  const order = useSelector((state) => state.order);
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
     dispatch(searchByName(e.target.value));
+    if(countriesResults.length)
+    switch(order){
+    case ALPHA_ASC:
+      dispatch(orderByAlphaAsc());
+      return; 
+    case ALPHA_DESC:
+      dispatch(orderByAlphaDesc());
+      return;
+    case POP_ASC:
+      dispatch(orderByPopAsc());
+      return;
+    case POP_DESC:
+      dispatch(orderByPopDesc());
+      return;
+    }
   };
 
   useEffect(async () => {
@@ -28,6 +49,7 @@ export function Main() {
     }
   }, []);
 
+  
   return (
     <div>
       <button onClick={() => dispatch(orderByAlphaAsc())}>ASC</button>
