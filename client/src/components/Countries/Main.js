@@ -10,22 +10,32 @@ import {
   orderByPopDesc,
   filterByActivities,
   filterByContinents,
+  searchByName,
 } from "./../../actions";
 export function Main() {
-  const countries = useSelector((state) => state.countries);
+  const countriesResults = useSelector((state) => state.countriesResults);
   const dispatch = useDispatch();
 
+  const handleChange = (e) => {
+    dispatch(searchByName(e.target.value));
+  };
+
   useEffect(async () => {
-    if (!countries.length) {
+    if (!countriesResults.length) {
       await dispatch(getCountries());
       await dispatch(getCountriesActivities());
       dispatch(orderByAlphaAsc());
     }
-  }, [dispatch]);
+  }, []);
 
   return (
     <div>
-      <Countries />
+      <button onClick={() => dispatch(orderByAlphaAsc())}>ASC</button>
+      <button onClick={() => dispatch(orderByAlphaDesc())}>DESC</button>
+      <button onClick={() => dispatch(orderByPopAsc())}>POP_ASC</button>
+      <button onClick={() => dispatch(orderByPopDesc())}>POP_DESC</button>
+      <input type="text" placeholder="SearchByName" onChange={handleChange} />
+      <Countries countries={countriesResults} />
     </div>
   );
 }
