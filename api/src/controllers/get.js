@@ -16,7 +16,8 @@ const getCountries = async (req, res) => {
         },
         include: Activity,
       });
-      //console.log(countriesName);
+      console.log(countriesName);
+      if (!countriesName.length) return res.send("No country found");
       res.json(countriesName);
     }
     //console.log(allCountries);
