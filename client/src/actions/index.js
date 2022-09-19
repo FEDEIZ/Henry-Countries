@@ -10,6 +10,11 @@ import {
   ORDER_BY_POP_DESC,
   SEARCH_BY_NAME,
 } from "./actionTypes.js";
+
+import {
+ACTIVITY_FILTER, ALPHA_ASC,
+ALPHA_DESC, CONTINENT_FILTER, POP_ASC, POP_DESC
+} from "./stateTypes.js"
 import axios from "axios";
 
 require("dotenv").config();
@@ -75,12 +80,13 @@ export function getCountriesActivities() {
 export function searchByName(name) {
   return async function (dispatch) {
     try {
-      const countries = await axios(
-        `${REACT_APP_API_URL}/countries?name=${name}`
-      );
+      // const countries = await axios(
+      //   `${REACT_APP_API_URL}/countries?name=${name}`
+      // );
+
       return dispatch({
         type: SEARCH_BY_NAME,
-        payload: countries.data,
+        payload: name,
       });
     } catch (err) {
       console.log(err.message);
