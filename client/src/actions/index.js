@@ -11,10 +11,6 @@ import {
   SEARCH_BY_NAME,
 } from "./actionTypes.js";
 
-import {
-ACTIVITY_FILTER, ALPHA_ASC,
-ALPHA_DESC, CONTINENT_FILTER, POP_ASC, POP_DESC
-} from "./stateTypes.js"
 import axios from "axios";
 
 require("dotenv").config();
@@ -154,11 +150,11 @@ export function filterByActivities(activitiesName) {
   };
 }
 
-export function filterByContinents(continents) {
+export function filterByContinents(continent, type) {
   return function (dispatch) {
     return dispatch({
       type: FILTER_BY_CONTINENT,
-      payload: continents,
+      payload: [continent, type],
     });
   };
 }

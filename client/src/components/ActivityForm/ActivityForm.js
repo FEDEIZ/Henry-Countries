@@ -22,7 +22,7 @@ const ActivityForm = () => {
 
   useEffect(() => {
     if (!countries.length) dispatch(getCountries());
-  });
+  }, []);
 
   useEffect(() => {
     if (countries.length)
@@ -31,7 +31,7 @@ const ActivityForm = () => {
         countriesAdded:
           countries.length && id ? [countries.find((c) => c.id === id)] : [],
       });
-  }, [countries]);
+  }, []);
 
   const selectedChange = (e) => {
     e.preventDefault();

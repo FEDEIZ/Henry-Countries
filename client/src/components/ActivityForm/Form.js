@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Form = ({
   countries,
@@ -117,7 +117,7 @@ const Form = ({
               formState.countriesAdded.map((c) => (
                 <div key={`${c.id}_activity`}>
                   <h4>{c.name}</h4>
-                  <img src={c.flagImg} />
+                  <img src={c.flagImg} alt={c.name} />
                   <button
                     name="removeCountrie"
                     onClick={removeCountry}

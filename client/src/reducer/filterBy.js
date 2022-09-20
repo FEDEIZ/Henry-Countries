@@ -12,7 +12,7 @@ export const countriesByActivity = (countries, activitiesF) => {
         }
       }
     }
-    return [...countriesByActivitySet];
+    return Array.from(countriesByActivitySet);
   }
 };
 export const countriesByContinents = (countries, continentsF) => {
@@ -26,9 +26,22 @@ export const countriesByContinents = (countries, continentsF) => {
         }
       }
     }
-    return [...countriesByContinentSet];
-  }
+    return Array.from(countriesByContinentSet);
+  } else return countries;
 };
+
+export const getContinents = (countries) => {
+  const continents = new Set();
+  if (countries.length) {
+    countries.forEach((c) => {
+      continents.add(
+        c.continent.charAt(0).toUpperCase() + c.continent.slice(1).toLowerCase()
+      );
+    });
+    return Array.from(continents);
+  } else return [];
+};
+
 //match(/^.*BRA.*$/)
 // const activitiesF = ["MUSEOS", "RESTAURANTES", "MONTANISMO"];
 // const continentsF = ["AMERICAS", "EUROPE"];

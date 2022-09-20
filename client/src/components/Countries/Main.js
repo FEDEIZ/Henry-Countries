@@ -7,21 +7,23 @@ import {
   getCountriesActivities,
 } from "./../../actions";
 
-import Nav from "./Nav.js";
+import Nav from "./Nav/Nav.js";
 
 export function Main() {
   const countriesResults = useSelector((state) => state.countriesResults);
   const dispatch = useDispatch();
 
-  useEffect(async () => {
-    if (!countriesResults.length) {
-      await dispatch(getCountries());
-      await dispatch(getCountriesActivities());
-      dispatch(orderByAlphaAsc());
+  useEffect(() => {
+    async function initial() {
+      if (!countriesResults.length) {
+        await dispatch(getCountries());
+        await dispatch(getCountriesActivities());
+        dispatch(orderByAlphaAsc());
+      }
     }
+    initial();
   }, []);
 
-  
   return (
     <div>
       <Nav />
