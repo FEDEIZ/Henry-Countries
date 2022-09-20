@@ -21,7 +21,7 @@ export const countriesByContinents = (countries, continentsF) => {
   if (continentsF.length > 0) {
     for (let i = 0; i < continentsF.length; i++) {
       for (let j = 0; j < countries.length; j++) {
-        if (continentsF[i] === countries[j].continent) {
+        if (continentsF[i].toUpperCase() === countries[j].continent) {
           countriesByContinentSet.add(countries[j]);
         }
       }

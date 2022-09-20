@@ -37,6 +37,7 @@ const initialState = {
     continents: [],
     activities: [],
   },
+  toggleFlag: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -58,20 +59,13 @@ function rootReducer(state = initialState, action) {
         countriesActivities: [...action.payload],
       };
     case FILTER_BY_CONTINENT:
+      console.log(action.payload);
       return {
         ...state,
-        filter: {
-          ...state.filter,
-          continents: action.payload[1]
-            ? [...state.filter.continents, action.payload[0]]
-            : state.filter.continents.filter(
-                (continent) => continent !== action.payload[0]
-              ),
-        },
-        countriesResults: countriesByContinents(
-          state.countriesResults,
-          state.filter.continents
-        ),
+        countriesResults: action.payload.length
+          ? countriesByContinents(state.countries, action.payload)
+          : state.countries,
+        toggleFlag: !state.toggleFlag,
       };
     case FILTER_BY_ACTIVITY_NAME:
       return {
@@ -80,30 +74,35 @@ function rootReducer(state = initialState, action) {
           state.countriesActivities,
           action.payload
         ),
+        toggleFlag: !state.toggleFlag,
       };
     case ORDER_BY_ALPHA_ASC:
       return {
         ...state,
         countriesResults: orderBy("ASC", state.countriesResults, "name"),
         order: ALPHA_ASC,
+        toggleFlag: !state.toggleFlag,
       };
     case ORDER_BY_ALPHA_DESC:
       return {
         ...state,
         countriesResults: orderBy("DESC", state.countriesResults, "name"),
         order: ALPHA_DESC,
+        toggleFlag: !state.toggleFlag,
       };
     case ORDER_BY_POP_ASC:
       return {
         ...state,
         countriesResults: orderBy("ASC", state.countriesResults, "population"),
         order: POP_ASC,
+        toggleFlag: !state.toggleFlag,
       };
     case ORDER_BY_POP_DESC:
       return {
         ...state,
         countriesResults: orderBy("DESC", state.countriesResults, "population"),
         order: POP_DESC,
+        toggleFlag: !state.toggleFlag,
       };
     case SEARCH_BY_NAME:
       return {
@@ -111,6 +110,7 @@ function rootReducer(state = initialState, action) {
         countriesResults: state.countries.filter((c) =>
           c.name.includes(action.payload.toUpperCase())
         ),
+        toggleFlag: !state.toggleFlag,
       };
     default:
       return state;

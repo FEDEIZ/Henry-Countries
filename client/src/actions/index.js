@@ -150,11 +150,11 @@ export function filterByActivities(activitiesName) {
   };
 }
 
-export function filterByContinents(continent, type) {
+export function filterByContinents(continent) {
   return function (dispatch) {
     return dispatch({
       type: FILTER_BY_CONTINENT,
-      payload: [continent, type],
+      payload: continent,
     });
   };
 }
