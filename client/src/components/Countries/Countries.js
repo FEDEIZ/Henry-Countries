@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React from "react";
+import { useSelector} from "react-redux";
 import { Link } from "react-router-dom";
 import Country from "./Country";
 
 const Countries = ({ countries }) => {
-  //useSelector((state) => state.countriesResultsFlag);
   useSelector((state) => state.order);
   useSelector((state) => state.countriesResults.length);
 
