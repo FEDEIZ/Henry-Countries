@@ -22,7 +22,7 @@ import {
   POP_DESC,
 } from "./../../actions/stateTypes.js";
 
-import Nav from "./Nav/Nav.js";
+import Nav from "./Paging/Paging.js";
 
 export function Main() {
   const countries = useSelector(state => state.countries);
