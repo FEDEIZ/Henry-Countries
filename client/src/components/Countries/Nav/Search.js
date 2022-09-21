@@ -6,7 +6,6 @@ export function Search() {
   const dispatch = useDispatch();
 
   const handleInputChange = async (e) => {
-    //dispatch(searchByName(e.target.value));
     dispatch(setCountrySearch(e.target.value));
   };
 

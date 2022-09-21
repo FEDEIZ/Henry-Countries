@@ -15,15 +15,6 @@ import {
 } from "../actions/actionTypes.js";
 
 import {
-  ACTIVITY_FILTER,
-  ALPHA_ASC,
-  ALPHA_DESC,
-  CONTINENT_FILTER,
-  POP_ASC,
-  POP_DESC,
-} from "../actions/stateTypes.js";
-
-import {
   countriesByActivity,
   countriesByContinents,
 } from "./filterBy.js";
@@ -70,7 +61,7 @@ function rootReducer(state = initialState, action) {
         filterCountries:       
         state.continentsFilter.length
           ? [].concat(countriesByContinents(state.countriesResults, state.continentsFilter))
-          : state.countriesResults,
+          : [],
       };
     case FILTER_BY_ACTIVITY_NAME:
       return {

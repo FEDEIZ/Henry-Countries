@@ -1,6 +1,6 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { searchByName } from "../../../actions";
+import { useSelector } from "react-redux";
+
 
 import Filter from "./Filter";
 import Order from "./Order";

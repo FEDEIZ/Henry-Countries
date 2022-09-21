@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Country from "./Country";
 
@@ -31,6 +30,8 @@ const Countries = ({ countries }) => {
         return;
       case 'FINAL':
         setActualPage(totalPages)
+        return;
+      default:
         return;
     }
   }

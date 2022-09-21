@@ -35,7 +35,7 @@ export function Main() {
       if (!countriesResults.length) {
         await dispatch(getCountries());
         await dispatch(getCountriesActivities());
-        dispatch(orderByAlphaAsc());
+
       }
     }
     initial();
@@ -74,10 +74,7 @@ export function Main() {
   
 },[order,continentsFilter,countries,countrySearch]);
 
-  // useEffect(() => {
-  //     if(countriesResults.length)
-  //     dispatch(filterByContinents(continentsFilter));
-  //   }, [continentsFilter]);
+
 
   return (
     <div>
