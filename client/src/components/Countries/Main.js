@@ -9,7 +9,10 @@ import {
   orderByPopDesc,
   getCountriesActivities,
   filterByContinents,
-  searchByName
+  searchByName,
+  setOrder,
+  setContinentsFilter,
+  setCountrySearch
 } from "./../../actions";
 
 import {
@@ -40,6 +43,14 @@ export function Main() {
     }
     initial();
   }, []);
+
+  useEffect(() => {
+    return () =>{
+      dispatch(setOrder(ALPHA_ASC));
+      dispatch(setContinentsFilter([]));
+      dispatch(setCountrySearch(''));
+    }
+  },[])
 
   useEffect(() => {
     
