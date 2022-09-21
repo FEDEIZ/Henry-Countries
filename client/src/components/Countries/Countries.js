@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import Country from "./Country";
 
 const Countries = ({ countries }) => {
-  useSelector((state) => state.toggleFlag);
-  useSelector((state) => state.order);
+  //useSelector((state) => state.countriesResults);
+  //useSelector((state) => state.order);
 
   return countries.length ? (
     <div>

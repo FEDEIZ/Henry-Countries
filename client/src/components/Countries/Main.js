@@ -11,6 +11,7 @@ import Nav from "./Nav/Nav.js";
 
 export function Main() {
   const countriesResults = useSelector((state) => state.countriesResults);
+  const filterCountries = useSelector((state) => state.filterCountries);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export function Main() {
   return (
     <div>
       <Nav />
-      <Countries countries={countriesResults} />
+      <Countries countries={ filterCountries.length? filterCountries : countriesResults} />
     </div>
   );
 }

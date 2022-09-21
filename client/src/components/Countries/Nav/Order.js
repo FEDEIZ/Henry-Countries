@@ -16,12 +16,11 @@ import {
 
 export function Order({ order }) {
   const dispatch = useDispatch();
-  const countriesResultChange = useSelector(
-    (state) => state.countriesResults.length
-  );
+  
+
 
   useEffect(() => {
-    if (countriesResultChange) {
+    
       switch (order) {
         case ALPHA_ASC:
           dispatch(orderByAlphaAsc());
@@ -38,8 +37,8 @@ export function Order({ order }) {
         default:
           return;
       }
-    }
-  }, [countriesResultChange]);
+    
+  },[order]);
 
   const handleOrderChange = (e) => {
     switch (e.target.value) {

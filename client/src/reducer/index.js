@@ -33,11 +33,7 @@ const initialState = {
   countriesActivities: [],
   countriesResults: [],
   order: "",
-  filter: {
-    continents: [],
-    activities: [],
-  },
-  toggleFlag: false,
+  filterCountries: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -62,10 +58,11 @@ function rootReducer(state = initialState, action) {
       console.log(action.payload);
       return {
         ...state,
-        countriesResults: action.payload.length
-          ? countriesByContinents(state.countries, action.payload)
-          : state.countries,
-        toggleFlag: !state.toggleFlag,
+        filterCountries:       
+         action.payload.length
+          ? [].concat(countriesByContinents(state.countriesResults, action.payload))
+          : state.countriesResults,
+        filterFlag: Boolean(action.payload.length)
       };
     case FILTER_BY_ACTIVITY_NAME:
       return {
@@ -74,43 +71,43 @@ function rootReducer(state = initialState, action) {
           state.countriesActivities,
           action.payload
         ),
-        toggleFlag: !state.toggleFlag,
       };
     case ORDER_BY_ALPHA_ASC:
       return {
         ...state,
-        countriesResults: orderBy("ASC", state.countriesResults, "name"),
+        countriesResults: [].concat(orderBy("ASC", state.countriesResults, "name")),
         order: ALPHA_ASC,
-        toggleFlag: !state.toggleFlag,
+        filterCountries: [].concat(orderBy("ASC", state.filterCountries, "name")),
       };
     case ORDER_BY_ALPHA_DESC:
       return {
         ...state,
-        countriesResults: orderBy("DESC", state.countriesResults, "name"),
+        countriesResults: [].concat(orderBy("DESC", state.countriesResults, "name")),
         order: ALPHA_DESC,
-        toggleFlag: !state.toggleFlag,
+        filterCountries: [].concat(orderBy("DESC", state.filterCountries, "name"))
       };
     case ORDER_BY_POP_ASC:
       return {
         ...state,
-        countriesResults: orderBy("ASC", state.countriesResults, "population"),
+        countriesResults: [].concat(orderBy("ASC", state.countriesResults, "population")),
         order: POP_ASC,
-        toggleFlag: !state.toggleFlag,
+        filterCountries: [].concat(orderBy("ASC", state.filterCountries, "population"))
       };
     case ORDER_BY_POP_DESC:
       return {
         ...state,
-        countriesResults: orderBy("DESC", state.countriesResults, "population"),
+        countriesResults: [].concat(orderBy("DESC", state.countriesResults, "population")),
         order: POP_DESC,
-        toggleFlag: !state.toggleFlag,
+        filterCountries: [].concat(orderBy("DESC", state.filterCountries, "population"))
       };
     case SEARCH_BY_NAME:
       return {
         ...state,
-        countriesResults: state.countries.filter((c) =>
-          c.name.includes(action.payload.toUpperCase())
+        countriesResults: [].concat(state.countries.filter((c) =>
+          c.name.includes(action.payload.toUpperCase()))
         ),
-        toggleFlag: !state.toggleFlag,
+        filterCountries: [].concat(state.filterCountries.filter(
+          (c) => c.name.includes(action.payload.toUpperCase()))),
       };
     default:
       return state;
