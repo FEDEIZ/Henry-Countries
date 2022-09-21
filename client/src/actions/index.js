@@ -9,6 +9,9 @@ import {
   ORDER_BY_POP_ASC,
   ORDER_BY_POP_DESC,
   SEARCH_BY_NAME,
+  SET_ORDER,
+  SET_CONTINENTS_FILTER,
+  SET_COUNTRY_SEARCH
 } from "./actionTypes.js";
 
 import axios from "axios";
@@ -73,16 +76,25 @@ export function getCountriesActivities() {
   };
 }
 
+export function setCountrySearch(name){
+  return function(dispatch){
+    return dispatch({
+      type: SET_COUNTRY_SEARCH,
+      payload: name
+    })
+  }
+}
+
 export function searchByName(name) {
   return async function (dispatch) {
     try {
-      // const countries = await axios(
-      //   `${REACT_APP_API_URL}/countries?name=${name}`
-      // );
+      const countries = await axios(
+        `${REACT_APP_API_URL}/countries?name=${name}`
+      );
 
       return dispatch({
         type: SEARCH_BY_NAME,
-        payload: name,
+        payload: countries.data,
       });
     } catch (err) {
       console.log(err.message);
@@ -107,6 +119,15 @@ export function postActivity(activity) {
       console.log(err.message);
     }
   };
+}
+
+export function setOrder(order){
+  return function(dispatch){
+    return dispatch({
+      type: SET_ORDER,
+      payload: order
+    })
+  }
 }
 
 export function orderByAlphaAsc() {
@@ -150,6 +171,14 @@ export function filterByActivities(activitiesName) {
   };
 }
 
+export function setContinentsFilter(continents){
+  return function (dispatch) {
+    return dispatch({
+      type: SET_CONTINENTS_FILTER,
+      payload: continents,
+    });
+  };
+}
 export function filterByContinents(continent) {
   return function (dispatch) {
     return dispatch({

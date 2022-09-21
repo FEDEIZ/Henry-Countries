@@ -1,12 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { searchByName } from "../../../actions";
+import { setCountrySearch } from "../../../actions";
 
 export function Search() {
   const dispatch = useDispatch();
 
-  const handleInputChange = (e) => {
-    dispatch(searchByName(e.target.value));
+  const handleInputChange = async (e) => {
+    //dispatch(searchByName(e.target.value));
+    dispatch(setCountrySearch(e.target.value));
   };
 
   return (

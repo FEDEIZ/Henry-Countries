@@ -1,10 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  orderByAlphaAsc,
-  orderByAlphaDesc,
-  orderByPopAsc,
-  orderByPopDesc,
+  setOrder
 } from "../../../actions";
 
 import {
@@ -19,44 +16,45 @@ export function Order({ order }) {
   
 
 
-  useEffect(() => {
+  // useEffect(() => {
     
-      switch (order) {
-        case ALPHA_ASC:
-          dispatch(orderByAlphaAsc());
-          return;
-        case ALPHA_DESC:
-          dispatch(orderByAlphaDesc());
-          return;
-        case POP_ASC:
-          dispatch(orderByPopAsc());
-          return;
-        case POP_DESC:
-          dispatch(orderByPopDesc());
-          return;
-        default:
-          return;
-      }
+  //     switch (order) {
+  //       case ALPHA_ASC:
+  //         dispatch(orderByAlphaAsc());
+  //         return;
+  //       case ALPHA_DESC:
+  //         dispatch(orderByAlphaDesc());
+  //         return;
+  //       case POP_ASC:
+  //         dispatch(orderByPopAsc());
+  //         return;
+  //       case POP_DESC:
+  //         dispatch(orderByPopDesc());
+  //         return;
+  //       default:
+  //         return;
+  //     }
     
-  },[order]);
+  // },[order]);
 
   const handleOrderChange = (e) => {
-    switch (e.target.value) {
-      case ALPHA_ASC:
-        if (order !== ALPHA_ASC) dispatch(orderByAlphaAsc());
-        return;
-      case ALPHA_DESC:
-        if (order !== ALPHA_DESC) dispatch(orderByAlphaDesc());
-        return;
-      case POP_ASC:
-        if (order !== POP_ASC) dispatch(orderByPopAsc());
-        return;
-      case POP_DESC:
-        if (order !== POP_DESC) dispatch(orderByPopDesc());
-        return;
-      default:
-        return;
-    }
+    // switch (e.target.value) {
+    //   case ALPHA_ASC:
+    //     if (order !== ALPHA_ASC) dispatch(orderByAlphaAsc());
+    //     return;
+    //   case ALPHA_DESC:
+    //     if (order !== ALPHA_DESC) dispatch(orderByAlphaDesc());
+    //     return;
+    //   case POP_ASC:
+    //     if (order !== POP_ASC) dispatch(orderByPopAsc());
+    //     return;
+    //   case POP_DESC:
+    //     if (order !== POP_DESC) dispatch(orderByPopDesc());
+    //     return;
+    //   default:
+    //     return;
+    // }
+    if(order !== e.target.value) dispatch(setOrder(e.target.value));
   };
 
   return (
