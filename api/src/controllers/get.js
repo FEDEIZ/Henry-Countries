@@ -7,7 +7,9 @@ const getCountries = async (req, res) => {
 
   try {
     if (!name) {
-      const allCountries = await Country.findAll();
+      const allCountries = await Country.findAll({
+        include: Activity
+      });
       res.json(allCountries);
     } else {
       const countriesName = await Country.findAll({
