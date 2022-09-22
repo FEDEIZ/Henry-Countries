@@ -56,7 +56,7 @@ export function Main() {
     
     const refresh = async () =>{
 
-      if(countriesResults.length){
+      if(countries.length){
   
       await dispatch(searchByName(countrySearch));
       dispatch(filterByContinents(continentsFilter));

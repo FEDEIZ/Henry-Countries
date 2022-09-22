@@ -108,7 +108,7 @@ function rootReducer(state = initialState, action) {
     case SEARCH_BY_NAME:
       return {
         ...state,
-        countriesResults: [].concat(action.payload),
+        countriesResults: Array.isArray(action.payload) ? [].concat(action.payload) : []
       };
     default:
       return state;
