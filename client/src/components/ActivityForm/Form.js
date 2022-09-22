@@ -1,4 +1,5 @@
 import React from "react";
+import Filter from "../Countries/Paging/Filter";
 
 const Form = ({
   countries,
@@ -87,6 +88,7 @@ const Form = ({
           <p className="danger">{errors.season}</p>
         )}
         <label>Countries</label>
+        <Filter />
         <select
           name="countriesId"
           onChange={selectedChange}

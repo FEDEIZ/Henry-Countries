@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries, postActivity } from "./../../actions";
+import { getCountries, postActivity, filterByContinents } from "./../../actions";
 import Form from "./Form";
 
 const ActivityForm = () => {
@@ -8,6 +8,9 @@ const ActivityForm = () => {
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
   const countries = useSelector((state) => state.countries);
+  const filterCountries = useSelector((state) => state.filterCountries);
+  const continentsFilter = useSelector((state) => state.continentsFilter);
+
   const [formState, setFormState] = useState({
     name: "",
     difficulty: "",
@@ -32,6 +35,10 @@ const ActivityForm = () => {
           countries.length && id ? [countries.find((c) => c.id === id)] : [],
       });
   }, []);
+
+  useEffect(() => {
+    dispatch(filterByContinents(continentsFilter))
+  },[continentsFilter])
 
   const selectedChange = (e) => {
     e.preventDefault();
@@ -144,11 +151,11 @@ const ActivityForm = () => {
       dispatch(postActivity(activity));
     });
   };
-  console.log(formState);
+  
   return (
     <div>
       <Form
-        countries={countries}
+        countries={continentsFilter.length ? filterCountries :  countries}
         formState={formState}
         errors={errors}
         selectedChange={selectedChange}
