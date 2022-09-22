@@ -1,22 +1,33 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setContinentsFilter } from "../../../actions";
-import { getContinents } from "../../../reducer/filterBy";
+import { setContinentsFilter, setActivitiesFilter } from "../../../actions";
+import { getContinents, getActivities } from "../../../reducer/filterBy";
 
 export function Filter() {
   const dispatch = useDispatch();
   const countries = useSelector((state) => state.countries);
   const continentsFilter = useSelector((state) => state.continentsFilter);
-  //const [continentsFilter, setContinentsFilter] = useState([]);
   const continents = getContinents(countries).sort();
   
+  const activitiesFilter = useSelector((state) => state.activities);
+  const countriesActivities = useSelector((state) => state.countriesActivities);
+  const activities = getActivities(countriesActivities);
 
-  const handleFilter = (e) => {
+  const handleFilterContinent = (e) => {
     if (e.target.checked)
       dispatch(setContinentsFilter([...continentsFilter, e.target.value]));
     else
       dispatch(setContinentsFilter(
         continentsFilter.filter((continents) => continents !== e.target.value)
+      ));
+  };
+
+  const handleFilterActivity = (e) => {
+    if (e.target.checked)
+      dispatch(setActivitiesFilter([...activitiesFilter, e.target.value]));
+    else
+      dispatch(setActivitiesFilter(
+        activitiesFilter.filter((activity) => activity !== e.target.value)
       ));
   };
 
@@ -31,7 +42,24 @@ export function Filter() {
               <input
                 type="checkbox"
                 value={continent}
-                onChange={handleFilter}
+                onChange={handleFilterContinent}
+              />
+            </label>
+          ))
+        ) : (
+          <></>
+        )}
+      </div>
+      <label>Filter By Activity:</label>
+      <div>
+        {activities.length ? (
+          activities.map((activity) => (
+            <label key={activity}>
+              {activity}
+              <input
+                type="checkbox"
+                value={activity}
+                onChange={handleFilterActivity}
               />
             </label>
           ))

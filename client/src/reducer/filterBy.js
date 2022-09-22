@@ -1,6 +1,6 @@
 export const countriesByActivity = (countries, activitiesF) => {
   const countriesByActivitySet = new Set();
-
+  console.log(countries);
   if (activitiesF.length > 0) {
     for (let i = 0; i < activitiesF.length; i++) {
       for (let j = 0; j < countries.length; j++) {
@@ -39,6 +39,18 @@ export const getContinents = (countries) => {
       );
     });
     return Array.from(continents);
+  } else return [];
+};
+
+export const getActivities = (countriesActivity) => {
+  const activities = new Set();
+  if (countriesActivity.length) {
+    for(let c=0; c<countriesActivity.length; c++) {
+      for(let a =0; a<countriesActivity[c].activities.length; a++){
+        activities.add(countriesActivity[c].activities[a].name);
+      }
+    }
+    return Array.from(activities);
   } else return [];
 };
 

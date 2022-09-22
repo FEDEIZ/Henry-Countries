@@ -11,7 +11,8 @@ import {
   SEARCH_BY_NAME,
   SET_ORDER,
   SET_CONTINENTS_FILTER,
-  SET_COUNTRY_SEARCH
+  SET_COUNTRY_SEARCH,
+  SET_ACTIVITY_FILTER
 } from "./actionTypes.js";
 
 import axios from "axios";
@@ -162,11 +163,20 @@ export function orderByPopDesc() {
   };
 }
 
-export function filterByActivities(activitiesName) {
+export function setActivitiesFilter(activities){
+  return function (dispatch) {
+    return dispatch({
+      type: SET_ACTIVITY_FILTER,
+      payload: activities,
+    });
+  };
+}
+
+export function filterByActivities(activity) {
   return function (dispatch) {
     return dispatch({
       type: FILTER_BY_ACTIVITY_NAME,
-      payload: activitiesName,
+      payload: activity,
     });
   };
 }

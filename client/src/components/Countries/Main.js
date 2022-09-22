@@ -12,7 +12,8 @@ import {
   searchByName,
   setOrder,
   setContinentsFilter,
-  setCountrySearch
+  setCountrySearch,
+  filterByActivities
 } from "./../../actions";
 
 import {
@@ -30,6 +31,7 @@ export function Main() {
   const filterCountries = useSelector((state) => state.filterCountries);
   const order = useSelector((state) => state.order);
   const continentsFilter = useSelector((state) => state.continentsFilter);
+  const activities = useSelector((state) => state.activities);
   const countrySearch = useSelector((state) => state.countrySearch);
   const dispatch = useDispatch();
 
@@ -49,44 +51,62 @@ export function Main() {
       dispatch(setOrder(ALPHA_ASC));
       dispatch(setContinentsFilter([]));
       dispatch(setCountrySearch(''));
+      dispatch(getCountries());
     }
   },[])
 
   useEffect(() => {
+    applyOrder(order);
+  },[order])
+
+  useEffect(() => {
     
     const refresh = async () =>{
-
       if(countries.length){
-  
       await dispatch(searchByName(countrySearch));
       dispatch(filterByContinents(continentsFilter));
+      applyOrder(order)
   
-      switch (order) {
-        case ALPHA_ASC:
-          dispatch(orderByAlphaAsc());
-          return;
-        case ALPHA_DESC:
-          dispatch(orderByAlphaDesc());
-          return;
-        case POP_ASC:
-          dispatch(orderByPopAsc());
-          return;
-        case POP_DESC:
-          dispatch(orderByPopDesc());
-          return;
-        default:
-          return;
-      }
-      
     }
   }
   
   refresh();
-  
-},[order,continentsFilter,countries,countrySearch]);
+  console.log(filterCountries);
+},[continentsFilter,countries,countrySearch]);
+
+useEffect(() =>{
+  const refresh = async () =>{
+    if(countries.length){
+    await dispatch(searchByName(countrySearch));
+    dispatch(filterByActivities(activities));
+    applyOrder(order)
+
+  }
+}
+
+refresh();
+},[activities,countries,countrySearch])
 
 
 
+const applyOrder = (order) =>{
+  switch (order) {
+    case ALPHA_ASC:
+      dispatch(orderByAlphaAsc());
+      return;
+    case ALPHA_DESC:
+      dispatch(orderByAlphaDesc());
+      return;
+    case POP_ASC:
+      dispatch(orderByPopAsc());
+      return;
+    case POP_DESC:
+      dispatch(orderByPopDesc());
+      return;
+    default:
+      return;
+  }
+}
   return (
     <div>
       <Nav />

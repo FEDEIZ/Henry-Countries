@@ -11,7 +11,8 @@ import {
   GET_COUNTRIES_ACTIVITIES,
   SET_ORDER,
   SET_CONTINENTS_FILTER,
-  SET_COUNTRY_SEARCH
+  SET_COUNTRY_SEARCH,
+  SET_ACTIVITY_FILTER
 } from "../actions/actionTypes.js";
 
 import {
@@ -24,6 +25,7 @@ const initialState = {
   countries: [],
   countryDetail: {},
   countriesActivities: [],
+  activities: [],
   countriesResults: [],
   order: 'ALPHA_ASC',
   filterCountries: [],
@@ -63,13 +65,18 @@ function rootReducer(state = initialState, action) {
           ? [].concat(countriesByContinents(state.countriesResults, state.continentsFilter))
           : [],
       };
+    case SET_ACTIVITY_FILTER:
+      return {
+        ...state,
+        activities: [].concat(action.payload),
+        
+      }
     case FILTER_BY_ACTIVITY_NAME:
       return {
         ...state,
-        countriesResults: countriesByActivity(
-          state.countriesActivities,
-          action.payload
-        ),
+        filterCountries: state.activities.length ?  [].concat(countriesByActivity(state.countriesResults,
+          state.activities
+        )): [],
       };
     case SET_ORDER:
       return {

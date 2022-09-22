@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries, postActivity, filterByContinents } from "./../../actions";
+import { getCountries, postActivity, filterByContinents, setContinentsFilter } from "./../../actions";
 import Form from "./Form";
 
 const ActivityForm = () => {
@@ -39,6 +39,7 @@ const ActivityForm = () => {
   useEffect(() => {
     dispatch(filterByContinents(continentsFilter))
   },[continentsFilter])
+
 
   const selectedChange = (e) => {
     e.preventDefault();
