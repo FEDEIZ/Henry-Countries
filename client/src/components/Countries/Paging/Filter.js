@@ -1,4 +1,4 @@
-import React from "react";
+import React ,{useEffect, useState} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setContinentsFilter, setActivitiesFilter } from "../../../actions";
 import { getContinents, getActivities } from "../../../reducer/filterBy";
@@ -13,7 +13,7 @@ export function Filter() {
 
   const handleFilterContinent = (e) => {
     if (e.target.checked)
-      dispatch(setContinentsFilter([...continentsFilter, e.target.value]));
+      dispatch(setContinentsFilter([...continentsFilter, e.target.value]));    
     else
       dispatch(
         setContinentsFilter(
@@ -45,6 +45,7 @@ export function Filter() {
                 type="checkbox"
                 value={continent}
                 onChange={handleFilterContinent}
+                checked={continentsFilter.includes(continent)}
               />
             </label>
           ))
@@ -62,6 +63,7 @@ export function Filter() {
                 type="checkbox"
                 value={activity}
                 onChange={handleFilterActivity}
+                checked={activitiesFilter.includes(activity)}
               />
             </label>
           ))

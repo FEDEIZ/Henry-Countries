@@ -1,7 +1,5 @@
 export const filterBy = ([continents, activities], countries) => {
   var countriesResults = [];
-  console.log(continents);
-  console.log(activities);
   if (continents.length && activities.length) {
     countriesResults = countriesByContinents(countries, continents);
     countriesResults = countriesByActivity(countriesResults, activities);
