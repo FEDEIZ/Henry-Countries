@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries, postActivity, filterByContinents, setContinentsFilter } from "./../../actions";
+import {
+  getCountries,
+  postActivity,
+  filterCountries,
+  order,
+} from "./../../actions";
 import Form from "./Form";
 
 const ActivityForm = () => {
   const dispatch = useDispatch();
   const params = new URLSearchParams(window.location.search);
   const id = params.get("id");
-  const countries = useSelector((state) => state.countries);
-  const filterCountries = useSelector((state) => state.filterCountries);
+  const countriesResults = useSelector((state) => state.countriesResults);
   const continentsFilter = useSelector((state) => state.continentsFilter);
+  const activities = useSelector((state) => state.activities);
 
   const [formState, setFormState] = useState({
     name: "",
@@ -24,22 +29,23 @@ const ActivityForm = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    if (!countries.length) dispatch(getCountries());
+    if (!countriesResults.length) dispatch(getCountries());
   }, []);
 
   useEffect(() => {
-    if (countries.length)
+    if (countriesResults.length)
       setFormState({
         ...formState,
         countriesAdded:
-          countries.length && id ? [countries.find((c) => c.id === id)] : [],
+          countriesResults.length && id
+            ? [countriesResults.find((c) => c.id === id)]
+            : [],
       });
   }, []);
 
   useEffect(() => {
-    dispatch(filterByContinents(continentsFilter))
-  },[continentsFilter])
-
+    dispatch(filterCountries(continentsFilter, activities));
+  }, [continentsFilter, activities]);
 
   const selectedChange = (e) => {
     e.preventDefault();
@@ -73,7 +79,7 @@ const ActivityForm = () => {
         ...formState,
         countriesAdded: [
           ...formState.countriesAdded,
-          countries.find((c) => c.id === formState.countrySelected),
+          countriesResults.find((c) => c.id === formState.countrySelected),
         ],
         countriesId: [...formState.countriesId, formState.countrySelected],
       });
@@ -152,11 +158,11 @@ const ActivityForm = () => {
       dispatch(postActivity(activity));
     });
   };
-  
+
   return (
     <div>
       <Form
-        countries={continentsFilter.length ? filterCountries :  countries}
+        countries={countriesResults}
         formState={formState}
         errors={errors}
         selectedChange={selectedChange}

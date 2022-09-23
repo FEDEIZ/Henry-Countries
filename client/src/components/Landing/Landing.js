@@ -14,7 +14,6 @@ export function Landing() {
   const loadStore = async () => {
     await dispatch(getCountries());
     await dispatch(getCountriesActivities());
-    dispatch(orderByAlphaAsc());
   };
 
   if (!countries.length) loadStore(); // initial values store

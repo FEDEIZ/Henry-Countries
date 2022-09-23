@@ -1,11 +1,28 @@
+export const filterBy = ([continents, activities], countries) => {
+  var countriesResults = [];
+  console.log(continents);
+  console.log(activities);
+  if (continents.length && activities.length) {
+    countriesResults = countriesByContinents(countries, continents);
+    countriesResults = countriesByActivity(countriesResults, activities);
+  } else {
+    if (continents.length)
+      countriesResults = countriesByContinents(countries, continents);
+    if (activities.length)
+      countriesResults = countriesByActivity(countries, activities);
+  }
+  return countriesResults;
+};
+
 export const countriesByActivity = (countries, activitiesF) => {
   const countriesByActivitySet = new Set();
-  console.log(countries);
   if (activitiesF.length > 0) {
     for (let i = 0; i < activitiesF.length; i++) {
       for (let j = 0; j < countries.length; j++) {
         for (let k = 0; k < countries[j].activities.length; k++) {
-          if (activitiesF[i] === countries[j].activities[k].name) {
+          if (
+            activitiesF[i].toUpperCase() === countries[j].activities[k].name
+          ) {
             countriesByActivitySet.add(countries[j]);
             break;
           }
@@ -42,12 +59,15 @@ export const getContinents = (countries) => {
   } else return [];
 };
 
-export const getActivities = (countriesActivity) => {
+export const getActivities = (countries) => {
   const activities = new Set();
-  if (countriesActivity.length) {
-    for(let c=0; c<countriesActivity.length; c++) {
-      for(let a =0; a<countriesActivity[c].activities.length; a++){
-        activities.add(countriesActivity[c].activities[a].name);
+  if (countries.length) {
+    for (let c = 0; c < countries.length; c++) {
+      for (let a = 0; a < countries[c].activities.length; a++) {
+        activities.add(
+          countries[c].activities[a].name.charAt(0).toUpperCase() +
+            countries[c].activities[a].name.slice(1).toLowerCase()
+        );
       }
     }
     return Array.from(activities);

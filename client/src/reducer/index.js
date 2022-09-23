@@ -1,24 +1,17 @@
 import {
-  FILTER_BY_ACTIVITY_NAME,
-  FILTER_BY_CONTINENT,
   GET_COUNTRIES,
   GET_COUNTRY_DETAILS,
-  ORDER_BY_ALPHA_ASC,
-  ORDER_BY_ALPHA_DESC,
-  ORDER_BY_POP_ASC,
-  ORDER_BY_POP_DESC,
   SEARCH_BY_NAME,
   GET_COUNTRIES_ACTIVITIES,
   SET_ORDER,
+  ORDER,
   SET_CONTINENTS_FILTER,
   SET_COUNTRY_SEARCH,
-  SET_ACTIVITY_FILTER
+  SET_ACTIVITY_FILTER,
+  FILTER_COUNTRIES,
 } from "../actions/actionTypes.js";
 
-import {
-  countriesByActivity,
-  countriesByContinents,
-} from "./filterBy.js";
+import { filterBy } from "./filterBy.js";
 import orderBy from "./orderBy.js";
 
 const initialState = {
@@ -27,10 +20,10 @@ const initialState = {
   countriesActivities: [],
   activities: [],
   countriesResults: [],
-  order: 'ALPHA_ASC',
+  order: "ALPHA_ASC",
   filterCountries: [],
   continentsFilter: [],
-  countrySearch:''
+  countrySearch: "",
 };
 
 function rootReducer(state = initialState, action) {
@@ -54,68 +47,58 @@ function rootReducer(state = initialState, action) {
     case SET_CONTINENTS_FILTER:
       return {
         ...state,
-        continentsFilter: [].concat(action.payload)
-      }
-    
-    case FILTER_BY_CONTINENT:
-      return {
-        ...state,
-        filterCountries:       
-        state.continentsFilter.length
-          ? [].concat(countriesByContinents(state.countriesResults, state.continentsFilter))
-          : [],
+        continentsFilter: [].concat(action.payload),
       };
+
     case SET_ACTIVITY_FILTER:
       return {
         ...state,
         activities: [].concat(action.payload),
-        
-      }
-    case FILTER_BY_ACTIVITY_NAME:
+      };
+
+    case FILTER_COUNTRIES:
       return {
         ...state,
-        filterCountries: state.activities.length ?  [].concat(countriesByActivity(state.countriesResults,
-          state.activities
-        )): [],
+        countriesResults:
+          state.activities.length || state.continentsFilter.length
+            ? [].concat(
+                filterBy(
+                  [action.payload[0], action.payload[1]],
+                  state.countries
+                )
+              )
+            : [].concat(state.countries),
       };
+
     case SET_ORDER:
       return {
         ...state,
-        order: action.payload
-      }
-    case ORDER_BY_ALPHA_ASC:
+        order: action.payload,
+      };
+
+    case ORDER:
       return {
         ...state,
-        countriesResults: [].concat(orderBy("ASC", state.countriesResults, "name")),
-        filterCountries: [].concat(orderBy("ASC", state.filterCountries, "name")),
+        countriesResults: [].concat(
+          orderBy(
+            [action.payload[0], action.payload[1]],
+            state.countriesResults
+          )
+        ),
       };
-    case ORDER_BY_ALPHA_DESC:
-      return {
-        ...state,
-        countriesResults: [].concat(orderBy("DESC", state.countriesResults, "name")),
-        filterCountries: [].concat(orderBy("DESC", state.filterCountries, "name"))
-      };
-    case ORDER_BY_POP_ASC:
-      return {
-        ...state,
-        countriesResults: [].concat(orderBy("ASC", state.countriesResults, "population")),
-        filterCountries: [].concat(orderBy("ASC", state.filterCountries, "population"))
-      };
-    case ORDER_BY_POP_DESC:
-      return {
-        ...state,
-        countriesResults: [].concat(orderBy("DESC", state.countriesResults, "population")),
-        filterCountries: [].concat(orderBy("DESC", state.filterCountries, "population"))
-      };
+
     case SET_COUNTRY_SEARCH:
-      return{
+      return {
         ...state,
-        countrySearch: action.payload
-      }
+        countrySearch: action.payload,
+      };
+
     case SEARCH_BY_NAME:
       return {
         ...state,
-        countriesResults: Array.isArray(action.payload) ? [].concat(action.payload) : []
+        countries: Array.isArray(action.payload)
+          ? [].concat(action.payload)
+          : [],
       };
     default:
       return state;

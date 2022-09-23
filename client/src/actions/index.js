@@ -8,11 +8,13 @@ import {
   ORDER_BY_ALPHA_DESC,
   ORDER_BY_POP_ASC,
   ORDER_BY_POP_DESC,
+  ORDER,
   SEARCH_BY_NAME,
   SET_ORDER,
   SET_CONTINENTS_FILTER,
   SET_COUNTRY_SEARCH,
-  SET_ACTIVITY_FILTER
+  SET_ACTIVITY_FILTER,
+  FILTER_COUNTRIES,
 } from "./actionTypes.js";
 
 import axios from "axios";
@@ -77,13 +79,13 @@ export function getCountriesActivities() {
   };
 }
 
-export function setCountrySearch(name){
-  return function(dispatch){
+export function setCountrySearch(name) {
+  return function (dispatch) {
     return dispatch({
       type: SET_COUNTRY_SEARCH,
-      payload: name
-    })
-  }
+      payload: name,
+    });
+  };
 }
 
 export function searchByName(name) {
@@ -122,48 +124,25 @@ export function postActivity(activity) {
   };
 }
 
-export function setOrder(order){
-  return function(dispatch){
+export function setOrder(order) {
+  return function (dispatch) {
     return dispatch({
       type: SET_ORDER,
-      payload: order
-    })
-  }
+      payload: order,
+    });
+  };
 }
 
-export function orderByAlphaAsc() {
+export function order(orderType, parameter) {
   return function (dispatch) {
     return dispatch({
-      type: ORDER_BY_ALPHA_ASC,
+      type: ORDER,
+      payload: [orderType, parameter],
     });
   };
 }
 
-export function orderByAlphaDesc() {
-  return async function (dispatch) {
-    return dispatch({
-      type: ORDER_BY_ALPHA_DESC,
-    });
-  };
-}
-
-export function orderByPopAsc() {
-  return function (dispatch) {
-    return dispatch({
-      type: ORDER_BY_POP_ASC,
-    });
-  };
-}
-
-export function orderByPopDesc() {
-  return function (dispatch) {
-    return dispatch({
-      type: ORDER_BY_POP_DESC,
-    });
-  };
-}
-
-export function setActivitiesFilter(activities){
+export function setActivitiesFilter(activities) {
   return function (dispatch) {
     return dispatch({
       type: SET_ACTIVITY_FILTER,
@@ -172,16 +151,7 @@ export function setActivitiesFilter(activities){
   };
 }
 
-export function filterByActivities(activity) {
-  return function (dispatch) {
-    return dispatch({
-      type: FILTER_BY_ACTIVITY_NAME,
-      payload: activity,
-    });
-  };
-}
-
-export function setContinentsFilter(continents){
+export function setContinentsFilter(continents) {
   return function (dispatch) {
     return dispatch({
       type: SET_CONTINENTS_FILTER,
@@ -189,11 +159,12 @@ export function setContinentsFilter(continents){
     });
   };
 }
-export function filterByContinents(continent) {
+
+export function filterCountries(continents, activities) {
   return function (dispatch) {
     return dispatch({
-      type: FILTER_BY_CONTINENT,
-      payload: continent,
+      type: FILTER_COUNTRIES,
+      payload: [continents, activities],
     });
   };
 }

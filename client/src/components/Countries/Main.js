@@ -3,17 +3,13 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getCountries,
-  orderByAlphaAsc,
-  orderByAlphaDesc,
-  orderByPopAsc,
-  orderByPopDesc,
   getCountriesActivities,
-  filterByContinents,
   searchByName,
   setOrder,
   setContinentsFilter,
   setCountrySearch,
-  filterByActivities
+  filterCountries,
+  order,
 } from "./../../actions";
 
 import {
@@ -26,10 +22,9 @@ import {
 import Nav from "./Paging/Paging.js";
 
 export function Main() {
-  const countries = useSelector(state => state.countries);
+  const countries = useSelector((state) => state.countries);
   const countriesResults = useSelector((state) => state.countriesResults);
-  const filterCountries = useSelector((state) => state.filterCountries);
-  const order = useSelector((state) => state.order);
+  const orderSet = useSelector((state) => state.order);
   const continentsFilter = useSelector((state) => state.continentsFilter);
   const activities = useSelector((state) => state.activities);
   const countrySearch = useSelector((state) => state.countrySearch);
@@ -37,80 +32,68 @@ export function Main() {
 
   useEffect(() => {
     async function initial() {
-      if (!countriesResults.length) {
+      if (!countries.length) {
         await dispatch(getCountries());
         await dispatch(getCountriesActivities());
-
       }
     }
     initial();
   }, []);
 
   useEffect(() => {
-    return () =>{
+    return () => {
       dispatch(setOrder(ALPHA_ASC));
       dispatch(setContinentsFilter([]));
-      dispatch(setCountrySearch(''));
+      dispatch(setCountrySearch(""));
       dispatch(getCountries());
-    }
-  },[])
+      applyOrder(orderSet);
+    };
+  }, []);
 
   useEffect(() => {
-    applyOrder(order);
-  },[order])
+    if (countries.length) applyOrder(orderSet);
+  }, [orderSet]);
 
   useEffect(() => {
-    
-    const refresh = async () =>{
-      if(countries.length){
-      await dispatch(searchByName(countrySearch));
-      dispatch(filterByContinents(continentsFilter));
-      applyOrder(order)
-  
+    if (countries.length) {
+      dispatch(filterCountries(continentsFilter, activities));
+      applyOrder(orderSet);
     }
-  }
-  
-  refresh();
-  console.log(filterCountries);
-},[continentsFilter,countries,countrySearch]);
+  }, [activities, continentsFilter]);
 
-useEffect(() =>{
-  const refresh = async () =>{
-    if(countries.length){
-    await dispatch(searchByName(countrySearch));
-    dispatch(filterByActivities(activities));
-    applyOrder(order)
+  useEffect(() => {
+    search(countrySearch);
+  }, [countrySearch]);
 
-  }
-}
+  const applyOrder = (orderSet) => {
+    switch (orderSet) {
+      case ALPHA_ASC:
+        dispatch(order("ASC", "name"));
+        return;
+      case ALPHA_DESC:
+        dispatch(order("DESC", "name"));
+      case POP_ASC:
+        dispatch(order("ASC", "population"));
+        return;
+      case POP_DESC:
+        dispatch(order("DESC", "population"));
+        return;
+      default:
+        dispatch(order("ASC", "name"));
+        return;
+    }
+  };
 
-refresh();
-},[activities,countries,countrySearch])
+  const search = async (name) => {
+    await dispatch(searchByName(name));
+    dispatch(filterCountries(continentsFilter, activities));
+    applyOrder(orderSet);
+  };
 
-
-
-const applyOrder = (order) =>{
-  switch (order) {
-    case ALPHA_ASC:
-      dispatch(orderByAlphaAsc());
-      return;
-    case ALPHA_DESC:
-      dispatch(orderByAlphaDesc());
-      return;
-    case POP_ASC:
-      dispatch(orderByPopAsc());
-      return;
-    case POP_DESC:
-      dispatch(orderByPopDesc());
-      return;
-    default:
-      return;
-  }
-}
   return (
     <div>
       <Nav />
-      <Countries countries={ filterCountries.length? filterCountries : countriesResults} />
+      <Countries countries={countriesResults} />
     </div>
   );
 }

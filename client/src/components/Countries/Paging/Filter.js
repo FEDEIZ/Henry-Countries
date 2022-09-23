@@ -8,27 +8,29 @@ export function Filter() {
   const countries = useSelector((state) => state.countries);
   const continentsFilter = useSelector((state) => state.continentsFilter);
   const continents = getContinents(countries).sort();
-  
   const activitiesFilter = useSelector((state) => state.activities);
-  const countriesActivities = useSelector((state) => state.countriesActivities);
-  const activities = getActivities(countriesActivities);
+  const activities = getActivities(countries).sort();
 
   const handleFilterContinent = (e) => {
     if (e.target.checked)
       dispatch(setContinentsFilter([...continentsFilter, e.target.value]));
     else
-      dispatch(setContinentsFilter(
-        continentsFilter.filter((continents) => continents !== e.target.value)
-      ));
+      dispatch(
+        setContinentsFilter(
+          continentsFilter.filter((continents) => continents !== e.target.value)
+        )
+      );
   };
 
   const handleFilterActivity = (e) => {
     if (e.target.checked)
       dispatch(setActivitiesFilter([...activitiesFilter, e.target.value]));
     else
-      dispatch(setActivitiesFilter(
-        activitiesFilter.filter((activity) => activity !== e.target.value)
-      ));
+      dispatch(
+        setActivitiesFilter(
+          activitiesFilter.filter((activity) => activity !== e.target.value)
+        )
+      );
   };
 
   return (
