@@ -21,6 +21,7 @@ import {
 } from "./../../actions/stateTypes.js";
 
 import Nav from "./Paging/Paging.js";
+import CountriesActivities from "./CountriesActivities.js";
 
 export function Main() {
   const countries = useSelector((state) => state.countries);
@@ -29,12 +30,14 @@ export function Main() {
   const continentsFilter = useSelector((state) => state.continentsFilter);
   const activities = useSelector((state) => state.activities);
   const countrySearch = useSelector((state) => state.countrySearch);
+  const countriesActivities = useSelector((state) => state.countriesActivities);
   const dispatch = useDispatch();
 
   useEffect(() => {
     async function initial() {
       
         await dispatch(getCountries());
+        await dispatch(getCountriesActivities());
         await applyOrder(orderSet);
     }
     initial();
@@ -85,8 +88,11 @@ export function Main() {
       <Link to={`/activities`}>
         <h5>Create Activity</h5>
       </Link>
+      <h1>Countries</h1>
       <Nav />
       <Countries countries={countriesResults} />
+      <h2>Countries Activities</h2>
+      <CountriesActivities countries={countriesActivities} />
     </div>
   );
 }
