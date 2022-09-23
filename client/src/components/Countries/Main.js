@@ -1,6 +1,7 @@
 import Countries from "../Countries/Countries.js";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {
   getCountries,
   getCountriesActivities,
@@ -34,7 +35,6 @@ export function Main() {
     async function initial() {
       if (!countries.length) {
         await dispatch(getCountries());
-        await dispatch(getCountriesActivities());
       }
     }
     initial();
@@ -92,6 +92,9 @@ export function Main() {
 
   return (
     <div>
+      <Link to={`/activities`}>
+        <h5>Create Activity</h5>
+      </Link>
       <Nav />
       <Countries countries={countriesResults} />
     </div>

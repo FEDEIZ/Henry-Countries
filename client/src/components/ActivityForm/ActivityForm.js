@@ -7,6 +7,7 @@ import {
   order,
 } from "./../../actions";
 import Form from "./Form";
+import { Link } from "react-router-dom";
 
 const ActivityForm = () => {
   const dispatch = useDispatch();
@@ -161,6 +162,12 @@ const ActivityForm = () => {
 
   return (
     <div>
+      <Link to={id ? `/countries/${id}` : `/countries`}>
+        <h5>{'<'}</h5>
+      </Link>
+      <Link to={`/countries`}>
+        <h5>Countries</h5>
+      </Link>
       <Form
         countries={countriesResults}
         formState={formState}

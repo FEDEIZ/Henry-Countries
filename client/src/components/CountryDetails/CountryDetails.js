@@ -16,6 +16,9 @@ const CountryDetails = () => {
 
   return (
     <div>
+      <Link to={`/countries`}>
+        <h5>Countries</h5>
+      </Link>
       <div>
         <h1>{countryDetail.name}</h1>
         <h3>{countryDetail.id}</h3>

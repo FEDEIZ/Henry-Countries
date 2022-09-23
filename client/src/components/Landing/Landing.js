@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCountries,
-  getCountriesActivities,
-  orderByAlphaAsc,
 } from "../../actions";
 
 export function Landing() {
@@ -13,7 +11,6 @@ export function Landing() {
 
   const loadStore = async () => {
     await dispatch(getCountries());
-    await dispatch(getCountriesActivities());
   };
 
   if (!countries.length) loadStore(); // initial values store
