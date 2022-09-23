@@ -37,7 +37,7 @@ export function Main() {
     async function initial() {
       
         await dispatch(getCountries());
-        await dispatch(getCountriesActivities());
+        //await dispatch(getCountriesActivities());
         await applyOrder(orderSet);
     }
     initial();

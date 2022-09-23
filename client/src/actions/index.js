@@ -9,6 +9,7 @@ import {
   SET_COUNTRY_SEARCH,
   SET_ACTIVITY_FILTER,
   FILTER_COUNTRIES,
+  DELETE_ACTIVITY
 } from "./actionTypes.js";
 
 import axios from "axios";
@@ -70,6 +71,15 @@ export function getCountriesActivities() {
         payload: err.message,
       });
     }
+  };
+}
+
+export function deleteActivity(countryId){
+  return function(dispatch){
+    return dispatch({
+    type: DELETE_ACTIVITY,
+    payload:countryId
+  })
   };
 }
 

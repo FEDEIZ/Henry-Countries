@@ -9,6 +9,7 @@ import {
   SET_COUNTRY_SEARCH,
   SET_ACTIVITY_FILTER,
   FILTER_COUNTRIES,
+  DELETE_ACTIVITY
 } from "../actions/actionTypes.js";
 
 import { filterBy } from "./filterBy.js";
@@ -47,6 +48,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         countriesActivities: [...action.payload],
       };
+
+    case DELETE_ACTIVITY:
+      return {
+        ...state,
+        countriesActivities: [].concat(state.countriesActivities.filter(c => c.id !== action.payload)),
+      }
     case SET_CONTINENTS_FILTER:
       return {
         ...state,

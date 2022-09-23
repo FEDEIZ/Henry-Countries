@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Country from "./Country";
+import {deleteActivity} from "./../../actions"
+import { useDispatch } from "react-redux";
 
 const CountriesActivities = ({ countries }) => {
   const [countriesPerPage, setCountriesPerPage] = useState([]);
   const [actualPage, setActualPage] = useState(0);
-  var totalPages = Math.round(countries.length / 10) - 1;
+  var totalPages = Math.round(countries.length / 2) - 1;
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    totalPages = Math.round(countries.length / 10) - 1;
-    if (actualPage === 0) setCountriesPerPage([].concat(countries.slice(0, 9)));
+    totalPages = Math.round(countries.length / 2) - 1 ;
+    if (actualPage === 0) setCountriesPerPage([].concat(countries.slice(0, 2)));
     else
       setCountriesPerPage(
-        [].concat(countries.slice(actualPage * 10, actualPage * 10 + 10))
+        [].concat(countries.slice(actualPage * 2, actualPage * 2 + 2))
       );
   }, [countries, actualPage]);
 
@@ -34,6 +37,10 @@ const CountriesActivities = ({ countries }) => {
         return;
     }
   };
+
+  const deleteActivityHandle = (e) => {
+    dispatch(deleteActivity(e.target.value));
+  }
 
   return countries.length ? (
     <div>
@@ -76,7 +83,7 @@ const CountriesActivities = ({ countries }) => {
                 {c.activities.map( a => 
                     <div key={a.name}>
                         <h5>{a.name}</h5>
-                        <button>X</button>
+                        <button onClick={deleteActivityHandle} value={c.id}>X</button>
                     </div>
                 )}
             </div>
