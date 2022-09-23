@@ -6,14 +6,6 @@ import {
 } from "../../actions";
 
 export function Landing() {
-  const countries = useSelector((state) => state.countries);
-  const dispatch = useDispatch();
-
-  const loadStore = async () => {
-    await dispatch(getCountries());
-  };
-
-  if (!countries.length) loadStore(); // initial values store
 
   return (
     <div>

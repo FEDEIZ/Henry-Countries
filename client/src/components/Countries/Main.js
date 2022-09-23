@@ -33,9 +33,9 @@ export function Main() {
 
   useEffect(() => {
     async function initial() {
-      if (!countries.length) {
+      
         await dispatch(getCountries());
-      }
+        await applyOrder(orderSet);
     }
     initial();
   }, []);
@@ -50,20 +50,10 @@ export function Main() {
     };
   }, []);
 
-  useEffect(() => {
-    if (countries.length) applyOrder(orderSet);
-  }, [orderSet]);
 
   useEffect(() => {
-    if (countries.length) {
-      dispatch(filterCountries(continentsFilter, activities));
-      applyOrder(orderSet);
-    }
-  }, [activities, continentsFilter]);
-
-  useEffect(() => {
-    search(countrySearch);
-  }, [countrySearch]);
+    refresh(countrySearch.value);
+  }, [countrySearch,orderSet, activities, continentsFilter]);
 
   const applyOrder = (orderSet) => {
     switch (orderSet) {
@@ -84,8 +74,8 @@ export function Main() {
     }
   };
 
-  const search = async (name) => {
-    await dispatch(searchByName(name));
+  const refresh = async (name) => {
+    if(countrySearch.preValue !== name) await dispatch(searchByName(name));
     dispatch(filterCountries(continentsFilter, activities));
     applyOrder(orderSet);
   };

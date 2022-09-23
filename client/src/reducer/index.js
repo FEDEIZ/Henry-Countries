@@ -23,7 +23,10 @@ const initialState = {
   order: "ALPHA_ASC",
   filterCountries: [],
   continentsFilter: [],
-  countrySearch: "",
+  countrySearch: {
+    value:'',
+    preValue: ''
+  },
 };
 
 function rootReducer(state = initialState, action) {
@@ -90,7 +93,10 @@ function rootReducer(state = initialState, action) {
     case SET_COUNTRY_SEARCH:
       return {
         ...state,
-        countrySearch: action.payload,
+        countrySearch: {
+          value: action.payload,
+          preValue: state.countrySearch.value,
+        }
       };
 
     case SEARCH_BY_NAME:
