@@ -106,10 +106,10 @@ const ActivityForm = () => {
 
   const validate = (input) => {
     let errors = {};
-    if (!input.name) errors.name = "Name is required";
-    if (!input.difficulty) errors.difficulty = "Difficulty is required";
+    if (!input.name) errors.name = "*";
+    if (!input.difficulty) errors.difficulty = "*";
     if (input.days === "") {
-      errors.days = "Days is required";
+      errors.days = "*";
     } else if (
       (!parseInt(input.days) && parseInt(input.days) !== 0) ||
       parseInt(input.days) < 0 ||
@@ -117,7 +117,7 @@ const ActivityForm = () => {
     )
       errors.days = "Days must be a number beetween 0 and 365";
 
-    if (input.hours === "") errors.hours = "Hours is required";
+    if (input.hours === "") errors.hours = "*";
     else if (
       (!parseInt(input.hours) && parseInt(input.hours) !== 0) ||
       parseInt(input.hours) < 0 ||
@@ -128,9 +128,9 @@ const ActivityForm = () => {
     if (input.days === "0" && input.hours === "0")
       errors.days = "At least days or hours must be complete";
 
-    if (!input.season) errors.season = "Season is required";
+    if (!input.season) errors.season = "*";
     if (!input.countriesId.length)
-      errors.countriesId = "You must select at least one country";
+      errors.countriesId = "*";
     return errors;
   };
 

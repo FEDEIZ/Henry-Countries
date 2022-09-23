@@ -16,7 +16,11 @@ const Form = ({
     <div>
       <h1>Create new activity</h1>
       <form>
-        <label>Name</label>
+        {/* {errors.name && ( //if there some errors it will show <p/>
+          <p className="danger">{errors.name}</p>
+        )} */}
+        <label>Name {errors.name}
+        </label>
         <input
           type="text"
           name="name"
@@ -24,11 +28,8 @@ const Form = ({
           onChange={handleInputChange}
           value={formState["name"]}
         />
-        {errors.name && ( //if there some errors it will show <p/>
-          <p className="danger">{errors.name}</p>
-        )}
         <br />
-        <label>Difficulty</label>
+        <label>Difficulty {errors.difficulty}</label>
         <select
           name="difficulty"
           onChange={handleInputChange}
@@ -43,9 +44,9 @@ const Form = ({
           <option>4</option>
           <option>5</option>
         </select>
-        {errors.difficulty && ( //if there some errors it will show <p/>
+        {/* {errors.difficulty && ( //if there some errors it will show <p/>
           <p className="danger">{errors.difficulty}</p>
-        )}
+        )} */}
         <br />
         <label>Duration</label>
         <input
@@ -54,22 +55,22 @@ const Form = ({
           placeholder="Days"
           onChange={handleInputChange}
           value={formState.days}
-        ></input>
+        ></input> {errors.days}
+          {/* {errors.days && ( //if there some errors it will show <p/>
+            <p className="danger">{errors.days}</p>
+          )} */}
         <input
           type="text"
           name="hours"
           placeholder="Hours"
           onChange={handleInputChange}
           value={formState["hours"]}
-        />
-        <br />
-        {errors.days && ( //if there some errors it will show <p/>
-          <p className="danger">{errors.days}</p>
-        )}
-        {errors.hours && ( //if there some errors it will show <p/>
+        />{errors.hours}
+        {/* {errors.hours && ( //if there some errors it will show <p/>
           <p className="danger">{errors.hours}</p>
-        )}
-        <label>Select season</label>
+        )} */}
+        <br />
+        <label>Select season {errors.season}</label>
         <select
           name="season"
           onChange={handleInputChange}
@@ -84,11 +85,12 @@ const Form = ({
           <option value="Summer">Summer</option>
         </select>
         <br />
-        {errors.season && ( //if there some errors it will show <p/>
+        {/* {errors.season && ( //if there some errors it will show <p/>
           <p className="danger">{errors.season}</p>
-        )}
+        )} */}
         <label>Countries</label>
         <Filter />
+        {errors.countriesId}
         <select
           name="countriesId"
           onChange={selectedChange}
@@ -108,9 +110,9 @@ const Form = ({
           )}
         </select>
         <button onClick={addCountry}>ADD</button>
-        {errors.countriesId && ( //if there some errors it will show <p/>
+        {/* {errors.countriesId && ( //if there some errors it will show <p/>
           <p className="danger">{errors.countriesId}</p>
-        )}
+        )} */}
 
         <div>
           <h2>Countries activity</h2>
