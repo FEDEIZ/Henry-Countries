@@ -5,7 +5,7 @@ import CountryDetails from "./components/CountryDetails/CountryDetails";
 import Main from "./components/Countries/Main";
 import { Landing } from "./components/Landing/Landing";
 import ActivityForm from "./components/ActivityForm/ActivityForm";
-import Aux from "./components/aux/Aux.js";
+
 
 function App() {
   return (
