@@ -1,11 +1,32 @@
+@media only screen and (max-width: 1366px) {
+    .landing {
+        width: 1280px;
+        height: 600px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .landing {
+        width: 1008px;
+        height: 473px;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .landing {
+        width: 768px;
+        height: 360px;
+    }
+}
+
 .landing {
     background-image: url('./../../img/background.jpg');
     background-color: #cccccc;
-    height: 500px;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    background-position: center center;
 }
 
 .container {
