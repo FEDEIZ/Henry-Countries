@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Country from "./Country";
-import {deleteActivity} from "./../../actions"
+import Country from "./Country/Country";
+import { deleteActivity } from "./../../actions";
 import { useDispatch } from "react-redux";
 
 const CountriesActivities = ({ countries }) => {
@@ -11,7 +11,7 @@ const CountriesActivities = ({ countries }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    totalPages = Math.round(countries.length / 2) - 1 ;
+    totalPages = Math.round(countries.length / 2) - 1;
     if (actualPage === 0) setCountriesPerPage([].concat(countries.slice(0, 2)));
     else
       setCountriesPerPage(
@@ -40,7 +40,7 @@ const CountriesActivities = ({ countries }) => {
 
   const deleteActivityHandle = (e) => {
     dispatch(deleteActivity(e.target.value));
-  }
+  };
 
   return countries.length ? (
     <div>
@@ -76,17 +76,19 @@ const CountriesActivities = ({ countries }) => {
       </div>
       {countriesPerPage.map((c) => (
         <div key={c.id}>
-            <Link to={`/countries/${c.id}`}>
-            <Country name={c.name} continent={c.continent} flag={c.flagImg}/>
-            </Link>
-            <div>
-                {c.activities.map( a => 
-                    <div key={a.name}>
-                        <h5>{a.name}</h5>
-                        <button onClick={deleteActivityHandle} value={c.id}>X</button>
-                    </div>
-                )}
-            </div>
+          <Link to={`/countries/${c.id}`}>
+            <Country name={c.name} continent={c.continent} flag={c.flagImg} />
+          </Link>
+          <div>
+            {c.activities.map((a) => (
+              <div key={a.name}>
+                <h5>{a.name}</h5>
+                <button onClick={deleteActivityHandle} value={c.id}>
+                  X
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       ))}
     </div>

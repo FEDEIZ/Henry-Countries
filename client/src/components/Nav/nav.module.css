@@ -1,0 +1,13 @@
+ul{
+    padding-left:0;
+    }
+     
+li {
+    list-style: none;
+    display: inline;
+    padding-right: 10px;
+    }
+
+header {
+    background-color: rgb(79, 82, 82);
+}

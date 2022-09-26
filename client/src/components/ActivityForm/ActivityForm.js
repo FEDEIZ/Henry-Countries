@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getCountries,
-  postActivity,
-  filterCountries,
-  order,
-} from "./../../actions";
+import { getCountries, postActivity, filterCountries } from "./../../actions";
 import Form from "./Form";
-import { Link } from "react-router-dom";
+import Nav from "../Nav/Nav";
 
 const ActivityForm = () => {
   const dispatch = useDispatch();
@@ -129,8 +124,7 @@ const ActivityForm = () => {
       errors.days = "At least days or hours must be complete";
 
     if (!input.season) errors.season = "*";
-    if (!input.countriesId.length)
-      errors.countriesId = "*";
+    if (!input.countriesId.length) errors.countriesId = "*";
     return errors;
   };
 
@@ -162,12 +156,7 @@ const ActivityForm = () => {
 
   return (
     <div>
-      <Link to={id ? `/countries/${id}` : `/countries`}>
-        <h5>{'<'}</h5>
-      </Link>
-      <Link to={`/countries`}>
-        <h5>Countries</h5>
-      </Link>
+      <Nav />
       <Form
         countries={countriesResults}
         formState={formState}

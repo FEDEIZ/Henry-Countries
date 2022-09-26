@@ -1,7 +1,7 @@
-import Countries from "../Countries/Countries.js";
+import Countries from "./Countries/Countries.js";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import Nav from "../Nav/Nav.js";
 import {
   getCountries,
   getCountriesActivities,
@@ -20,7 +20,7 @@ import {
   POP_DESC,
 } from "./../../actions/stateTypes.js";
 
-import Nav from "./Paging/Paging.js";
+import Paging from "./Paging/Paging.js";
 import CountriesActivities from "./CountriesActivities.js";
 
 export function Main() {
@@ -35,10 +35,9 @@ export function Main() {
 
   useEffect(() => {
     async function initial() {
-      
-        await dispatch(getCountries());
-        //await dispatch(getCountriesActivities());
-        await applyOrder(orderSet);
+      await dispatch(getCountries());
+      //await dispatch(getCountriesActivities());
+      await applyOrder(orderSet);
     }
     initial();
   }, []);
@@ -53,10 +52,9 @@ export function Main() {
     };
   }, []);
 
-
   useEffect(() => {
     refresh(countrySearch.value);
-  }, [countrySearch,orderSet, activities, continentsFilter]);
+  }, [countrySearch, orderSet, activities, continentsFilter]);
 
   const applyOrder = (orderSet) => {
     switch (orderSet) {
@@ -78,21 +76,21 @@ export function Main() {
   };
 
   const refresh = async (name) => {
-    if(countrySearch.preValue !== name) await dispatch(searchByName(name));
+    if (countrySearch.preValue !== name) await dispatch(searchByName(name));
     dispatch(filterCountries(continentsFilter, activities));
     applyOrder(orderSet);
   };
-
   return (
     <div>
-      <Link to={`/activities`}>
-        <h5>Create Activity</h5>
-      </Link>
-      <h1>Countries</h1>
       <Nav />
-      <Countries countries={countriesResults} />
-      <h2>Countries Activities</h2>
-      <CountriesActivities countries={countriesActivities} />
+      <div>
+        <Paging />
+        <Countries countries={countriesResults} />
+      </div>
+      {/* <div>
+        <h2>Countries Activities</h2>
+        <CountriesActivities countries={countriesActivities} />
+      </div> */}
     </div>
   );
 }

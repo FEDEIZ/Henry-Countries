@@ -1,0 +1,14 @@
+.landing {
+    background-image: url('./../../img/background.jpg');
+    background-color: #cccccc;
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.container {
+    position: relative;
+    font-family: cursive;
+}

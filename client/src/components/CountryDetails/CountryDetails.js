@@ -16,9 +16,23 @@ const CountryDetails = () => {
 
   return (
     <div>
-      <Link to={`/countries`}>
-        <h5>Countries</h5>
-      </Link>
+      <header>
+        <h2>Countries</h2>
+        <nav>
+          <ul>
+            <li>
+              <Link to={`/activities`}>
+                <h5>Create Activity</h5>
+              </Link>
+            </li>
+            <li>
+              <Link to={`/countries`}>
+                <h5>Countries</h5>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+      </header>
       <div>
         <h1>{countryDetail.name}</h1>
         <h3>{countryDetail.id}</h3>
