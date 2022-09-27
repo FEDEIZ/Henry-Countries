@@ -9,17 +9,14 @@ export function Landing() {
   dispatch(getCountriesActivities());
 
   return (
-    <body>
-      <div className={style.landing}>
-        <div className={style.container}>
-          <h1>Around the world</h1>
-          <div>
-            <button>
-              <Link to="/countries">Home</Link>
-            </button>
-          </div>
-        </div>
+    <div className={style.landing}>
+      <div className={style.title}>
+        <h1>Around the world</h1>
       </div>
-    </body>
+
+      <Link to="/countries">
+        <div className={style.buttonStart}></div>
+      </Link>
+    </div>
   );
 }

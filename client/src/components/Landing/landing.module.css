@@ -1,23 +1,25 @@
-@media only screen and (max-width: 1366px) {
+@media only screen and (max-width: 1280px) { /* 32 inch */
     .landing {
         width: 1280px;
         height: 600px;
     }
 }
 
-@media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 863px) { /* 14 inch */
     .landing {
-        width: 1008px;
-        height: 473px;
+        width: 862px;
+        height: 445px;
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 500px) { /* 4.5 inch */
     .landing {
-        width: 768px;
+        width: 500px;
         height: 360px;
     }
 }
+
+
 
 .landing {
     background-image: url('./../../img/background.jpg');
@@ -27,9 +29,54 @@
     background-size: cover;
     position: relative;
     background-position: center center;
+
 }
 
-.container {
+.title {
     position: relative;
-    font-family: cursive;
+    font-family: 'myFirstFont',cursive;
+    backdrop-filter: blur(10px);
+}
+
+ .buttonStart {
+    position: absolute;
+    width: 150px;
+    height: 30px;
+    background-color: rgb(84, 107, 134);
+    border-radius: 5px;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+}
+
+.buttonStart::before{
+    content: '¡Get Start!';
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    transition: all .5s ease-in-out;
+}
+
+.buttonStart:hover::before{
+    top: -50%;
+}
+
+.buttonStart::after{
+    content: '¡Now!';
+    color: black;
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    transition: all .5s ease-in-out;
+}
+
+.buttonStart:hover::after{
+    top: 50%;
 }
