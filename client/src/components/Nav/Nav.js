@@ -5,7 +5,9 @@ import style from "./nav.module.css";
 const Nav = () => {
   return (
     <header>
-      <h1>Around the World</h1>
+      <div className={style.title}>
+        <h1>Around the world</h1>
+      </div>
       <nav>
         <ul>
           <li>

@@ -1,0 +1,19 @@
+.main{
+    background-image: url('./../../img/background2.jpg');
+    background-color: #cccccc;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-position: center center;
+    width: 862px;
+    height: 445px;
+    
+}
+
+.title {
+    position: relative;
+    font-family: 'myFirstFont',cursive;
+    color: rgb(8,77,110);
+    backdrop-filter: blur(10px);
+}

@@ -35,6 +35,7 @@
 .title {
     position: relative;
     font-family: 'myFirstFont',cursive;
+    color: rgb(8,77,110);
     backdrop-filter: blur(10px);
 }
 

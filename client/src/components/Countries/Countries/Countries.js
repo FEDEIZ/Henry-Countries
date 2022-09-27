@@ -71,7 +71,14 @@ const Countries = ({ countries }) => {
       <div className={containerCountries}>
         {countriesPerPage.map((c) => (
           <Link key={c.id} to={`/countries/${c.id}`}>
-            <Country name={c.name} continent={c.continent} flag={c.flagImg} />
+            <Country
+              name={c.name[0] + c.name.slice(1, c.name.length).toLowerCase()}
+              continent={
+                c.continent[0] +
+                c.continent.slice(1, c.continent.length).toLowerCase()
+              }
+              flag={c.flagImg}
+            />
           </Link>
         ))}
       </div>

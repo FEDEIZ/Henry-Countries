@@ -8,6 +8,11 @@ li {
     padding-right: 10px;
     }
 
-header {
-    background-color: rgb(79, 82, 82);
+
+
+.title {
+    position: relative;
+    font-family: 'myFirstFont',cursive;
+    color: rgb(8,77,110);
+    backdrop-filter: blur(10px);
 }

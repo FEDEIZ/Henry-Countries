@@ -22,6 +22,7 @@ import {
 
 import Paging from "./Paging/Paging.js";
 import CountriesActivities from "./CountriesActivities.js";
+import style from "./main.module.css";
 
 export function Main() {
   const countries = useSelector((state) => state.countries);
@@ -81,7 +82,7 @@ export function Main() {
     applyOrder(orderSet);
   };
   return (
-    <div>
+    <div className={style.main}>
       <Nav />
       <div>
         <Paging />
