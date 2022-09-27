@@ -9,7 +9,8 @@ import {
   SET_COUNTRY_SEARCH,
   SET_ACTIVITY_FILTER,
   FILTER_COUNTRIES,
-  DELETE_ACTIVITY
+  DELETE_ACTIVITY,
+  SET_COMPONENT_SHOW,
 } from "../actions/actionTypes.js";
 
 import { filterBy } from "./filterBy.js";
@@ -25,9 +26,10 @@ const initialState = {
   filterCountries: [],
   continentsFilter: [],
   countrySearch: {
-    value:'',
-    preValue: ''
+    value: "",
+    preValue: "",
   },
+  componentShow: "countries", // or countriesActivities
 };
 
 function rootReducer(state = initialState, action) {
@@ -37,6 +39,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         countries: action.payload,
         countriesResults: action.payload,
+        componentShow: "countries",
       };
     case GET_COUNTRY_DETAILS:
       return {
@@ -52,8 +55,10 @@ function rootReducer(state = initialState, action) {
     case DELETE_ACTIVITY:
       return {
         ...state,
-        countriesActivities: [].concat(state.countriesActivities.filter(c => c.id !== action.payload)),
-      }
+        countriesActivities: [].concat(
+          state.countriesActivities.filter((c) => c.id !== action.payload)
+        ),
+      };
     case SET_CONTINENTS_FILTER:
       return {
         ...state,
@@ -66,18 +71,33 @@ function rootReducer(state = initialState, action) {
         activities: [].concat(action.payload),
       };
 
+    case SET_COMPONENT_SHOW:
+      return {
+        ...state,
+        componentShow: action.payload,
+      };
+
     case FILTER_COUNTRIES:
       return {
         ...state,
         countriesResults:
           state.activities.length || state.continentsFilter.length
-            ? [].concat(
-                filterBy(
-                  [action.payload[0], action.payload[1]],
-                  state.countries
+            ? state.componentShow === "countries"
+              ? [].concat(
+                  filterBy(
+                    [action.payload[0], action.payload[1]],
+                    state.countries
+                  )
                 )
-              )
-            : [].concat(state.countries),
+              : [].concat(
+                  filterBy(
+                    [action.payload[0], action.payload[1]],
+                    state.countriesActivities
+                  )
+                )
+            : state.componentShow === "countries"
+            ? [].concat(state.countries)
+            : [].concat(state.countriesActivities),
       };
 
     case SET_ORDER:
@@ -103,7 +123,7 @@ function rootReducer(state = initialState, action) {
         countrySearch: {
           value: action.payload,
           preValue: state.countrySearch.value,
-        }
+        },
       };
 
     case SEARCH_BY_NAME:

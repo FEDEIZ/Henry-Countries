@@ -7,12 +7,12 @@ import Search from "./Search";
 
 export function Paging() {
   const order = useSelector((state) => state.order);
-
+  const componentShow = useSelector((state) => state.componentShow);
   return (
     <nav>
       <Order order={order} />
       <Filter />
-      <Search />
+      {componentShow === "countries" ? <Search /> : <></>}
     </nav>
   );
 }

@@ -9,7 +9,8 @@ import {
   SET_COUNTRY_SEARCH,
   SET_ACTIVITY_FILTER,
   FILTER_COUNTRIES,
-  DELETE_ACTIVITY
+  DELETE_ACTIVITY,
+  SET_COMPONENT_SHOW,
 } from "./actionTypes.js";
 
 import axios from "axios";
@@ -74,12 +75,12 @@ export function getCountriesActivities() {
   };
 }
 
-export function deleteActivity(countryId){
-  return function(dispatch){
+export function deleteActivity(countryId) {
+  return function (dispatch) {
     return dispatch({
-    type: DELETE_ACTIVITY,
-    payload:countryId
-  })
+      type: DELETE_ACTIVITY,
+      payload: countryId,
+    });
   };
 }
 
@@ -169,6 +170,15 @@ export function filterCountries(continents, activities) {
     return dispatch({
       type: FILTER_COUNTRIES,
       payload: [continents, activities],
+    });
+  };
+}
+
+export function setComponentShow(component) {
+  return function (dispatch) {
+    return dispatch({
+      type: SET_COMPONENT_SHOW,
+      payload: component,
     });
   };
 }

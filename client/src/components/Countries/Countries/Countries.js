@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Country from "../Country/Country";
 import { containerCountries } from "./countries.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteActivity } from "../../../actions";
 
 const Countries = ({ countries }) => {
   const [countriesPerPage, setCountriesPerPage] = useState([]);
   const [actualPage, setActualPage] = useState(0);
   var totalPages = Math.round(countries.length / 10);
+  const componentShow = useSelector((state) => state.componentShow);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     totalPages = Math.round(countries.length / 10);
@@ -36,6 +40,9 @@ const Countries = ({ countries }) => {
     }
   };
 
+  const deleteActivityHandle = (e) => {
+    dispatch(deleteActivity(e.target.value));
+  };
   return countries.length ? (
     <div>
       <div>
@@ -70,16 +77,26 @@ const Countries = ({ countries }) => {
       </div>
       <div className={containerCountries}>
         {countriesPerPage.map((c) => (
-          <Link key={c.id} to={`/countries/${c.id}`}>
-            <Country
-              name={c.name[0] + c.name.slice(1, c.name.length).toLowerCase()}
-              continent={
-                c.continent[0] +
-                c.continent.slice(1, c.continent.length).toLowerCase()
-              }
-              flag={c.flagImg}
-            />
-          </Link>
+          <div>
+            <Link key={c.id} to={`/countries/${c.id}`}>
+              <Country
+                name={c.name[0] + c.name.slice(1, c.name.length).toLowerCase()}
+                continent={
+                  c.continent[0] +
+                  c.continent.slice(1, c.continent.length).toLowerCase()
+                }
+                flag={c.flagImg}
+              />
+            </Link>
+            {/* {c.activities.map((a) => (
+              <div key={a.name}>
+                <h5>{a.name}</h5>
+                <button onClick={deleteActivityHandle} value={c.id}>
+                  X
+                </button>
+              </div>
+            ))} */}
+          </div>
         ))}
       </div>
     </div>
