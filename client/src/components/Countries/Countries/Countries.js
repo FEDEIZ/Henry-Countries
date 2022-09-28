@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Country from "../Country/Country";
+import Page from "./Page.js";
 import { containerCountries } from "./countries.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import { deleteActivity } from "../../../actions";
+// import { useSelector, useDispatch } from "react-redux";
+// import { deleteActivity } from "../../../actions";
 
 const Countries = ({ countries }) => {
   const [countriesPerPage, setCountriesPerPage] = useState([]);
   const [actualPage, setActualPage] = useState(0);
   var totalPages = Math.round(countries.length / 10);
-  const componentShow = useSelector((state) => state.componentShow);
-  const dispatch = useDispatch();
+
+  //const dispatch = useDispatch();
 
   useEffect(() => {
     totalPages = Math.round(countries.length / 10);
@@ -40,45 +41,21 @@ const Countries = ({ countries }) => {
     }
   };
 
-  const deleteActivityHandle = (e) => {
-    dispatch(deleteActivity(e.target.value));
-  };
+  // const deleteActivityHandle = (e) => {
+  //   dispatch(deleteActivity(e.target.value));
+  // };
+
   return countries.length ? (
     <div>
-      <div>
-        <button
-          onClick={handlePageChange}
-          value={"FIRST"}
-          disabled={!actualPage}
-        >
-          {"<<"}
-        </button>
-        <button
-          onClick={handlePageChange}
-          value={"LAST"}
-          disabled={actualPage - 1 < 0}
-        >
-          {"<"}
-        </button>
-        <button
-          onClick={handlePageChange}
-          value={"NEXT"}
-          disabled={actualPage + 1 > totalPages}
-        >
-          {">"}
-        </button>
-        <button
-          onClick={handlePageChange}
-          value={"FINAL"}
-          disabled={actualPage === totalPages}
-        >
-          {">>"}
-        </button>
-      </div>
+      <Page
+        handlePageChange={handlePageChange}
+        actualPage={actualPage}
+        totalPages={totalPages}
+      />
       <div className={containerCountries}>
         {countriesPerPage.map((c) => (
-          <div>
-            <Link key={c.id} to={`/countries/${c.id}`}>
+          <div key={c.id}>
+            <Link to={`/countries/${c.id}`}>
               <Country
                 name={c.name[0] + c.name.slice(1, c.name.length).toLowerCase()}
                 continent={
@@ -88,14 +65,19 @@ const Countries = ({ countries }) => {
                 flag={c.flagImg}
               />
             </Link>
-            {/* {c.activities.map((a) => (
-              <div key={a.name}>
-                <h5>{a.name}</h5>
-                <button onClick={deleteActivityHandle} value={c.id}>
-                  X
-                </button>
-              </div>
-            ))} */}
+            <div>
+              {c.activities.length ? (
+                <div key={c.id + "_act"}>
+                  {c.activities.map((a) => (
+                    <h5 key={a.name}>
+                      {a.name[0] + a.name.slice(1, a.name.length).toLowerCase()}
+                    </h5>
+                  ))}
+                </div>
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
         ))}
       </div>

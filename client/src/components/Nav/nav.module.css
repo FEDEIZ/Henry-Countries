@@ -10,9 +10,31 @@ li {
 
 
 
+
 .title {
     position: relative;
     font-family: 'myFirstFont',cursive;
     color: rgb(8,77,110);
     backdrop-filter: blur(10px);
+}
+
+.buttonNav{
+    display: inline-block;
+    color:black;
+    width: 150px;
+    height: 20px;
+    background-color: rgb(84, 107, 134);
+    border-radius: 5px;
+}
+
+.buttonNav:hover {
+    box-shadow: 2px 2px 5px #999;
+
+}
+
+.navContainer{
+    display: inline-flex;
+    justify-content: space-between;
+    /* align-items: center; */
+
 }

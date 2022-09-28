@@ -12,30 +12,32 @@ const Nav = () => {
       <div className={style.title}>
         <h1>Around the world</h1>
       </div>
-      <nav>
+      <nav className={style.navContainer}>
         <ul>
           <li>
             <Link to={`/activities`}>
-              <button>Create Activity</button>
+              <div className={style.buttonNav}>
+                <h5>Create Activity</h5>
+              </div>
             </Link>
           </li>
           <li>
             <Link to={`/countries`}>
-              <button onClick={() => dispatch(setComponentShow("countries"))}>
-                Countries
-              </button>
+              <div
+                className={style.buttonNav}
+                onClick={() => dispatch(setComponentShow("countries"))}
+              >
+                <h5>Countries</h5>
+              </div>
             </Link>
           </li>
           <li>
-            <Link to={`/countries?activities=true`}>
-              <button
-                onClick={() =>
-                  dispatch(setComponentShow("countriesActivities"))
-                }
-              >
-                Countries Activities
-              </button>
-            </Link>
+            <div
+              className={style.buttonNav}
+              onClick={() => dispatch(setComponentShow("countriesActivities"))}
+            >
+              <h5>Countries Activities</h5>
+            </div>
           </li>
         </ul>
       </nav>
