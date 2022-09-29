@@ -1,0 +1,11 @@
+.body{
+    background-image: url('./../../img/background2.jpg');
+    background-color: #cccccc;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-position: center center;
+    width: 862px;
+    height: 445px;
+}

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCountryDetail } from "../../actions";
 import { Link } from "react-router-dom";
+import Nav from "./../Nav/Nav.js";
+import style from "./countryDetails.module.css";
 
 const CountryDetails = () => {
   const countryDetail = useSelector((state) => state.countryDetail);
@@ -15,24 +17,8 @@ const CountryDetails = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <header>
-        <h2>Countries</h2>
-        <nav>
-          <ul>
-            <li>
-              <Link to={`/activities`}>
-                <h5>Create Activity</h5>
-              </Link>
-            </li>
-            <li>
-              <Link to={`/countries`}>
-                <h5>Countries</h5>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
+    <div className={style.body}>
+      <Nav />
       <div>
         <h1>{countryDetail.name}</h1>
         <h3>{countryDetail.id}</h3>

@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    width: 100px;
+    position:relative;
+    left:380px;
+    justify-content: space-around;
+    align-items: center;
+    border-style:solid;
+    border-color: rgb(209, 196, 196);
+    border-width: 1px;
+    border-radius: 3px;
+}
+
+button{
+    background-color: transparent;
+    color: rgb(209, 196, 196);
+    font-size: 15px;
+}
+
+button:disabled{
+    color: rgb(114, 110, 110);
+}

@@ -47,11 +47,13 @@ const Countries = ({ countries }) => {
 
   return countries.length ? (
     <div>
-      {/* <Page
-        handlePageChange={handlePageChange}
-        actualPage={actualPage}
-        totalPages={totalPages}
-      /> */}
+      <div>
+        <Page
+          handlePageChange={handlePageChange}
+          actualPage={actualPage}
+          totalPages={totalPages}
+        />
+      </div>
       <div className={containerCountries}>
         {countriesPerPage.map((c) => (
           <div key={c.id}>
