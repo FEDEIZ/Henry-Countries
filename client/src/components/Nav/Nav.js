@@ -12,12 +12,12 @@ const Nav = () => {
       <div className={style.title}>
         <h1>Around the world</h1>
       </div>
-      <nav className={style.navContainer}>
+      <nav>
         <ul>
           <li>
             <Link to={`/activities`}>
               <div className={style.buttonNav}>
-                <h5>Create Activity</h5>
+                <p>Create Activity</p>
               </div>
             </Link>
           </li>
@@ -27,7 +27,7 @@ const Nav = () => {
                 className={style.buttonNav}
                 onClick={() => dispatch(setComponentShow("countries"))}
               >
-                <h5>Countries</h5>
+                <p>Countries</p>
               </div>
             </Link>
           </li>
@@ -36,7 +36,7 @@ const Nav = () => {
               className={style.buttonNav}
               onClick={() => dispatch(setComponentShow("countriesActivities"))}
             >
-              <h5>Countries Activities</h5>
+              <p>Countries Activities</p>
             </div>
           </li>
         </ul>

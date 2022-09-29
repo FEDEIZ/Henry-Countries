@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setContinentsFilter, setActivitiesFilter } from "../../../actions";
 import { getContinents, getActivities } from "../../../reducer/filterBy";
+import style from "./filter.module.css";
 
 export function Filter() {
   const dispatch = useDispatch();
@@ -34,42 +35,48 @@ export function Filter() {
   };
 
   return (
-    <div>
-      <label>Filter By Continents:</label>
-      <div>
-        {continents.length ? (
-          continents.map((continent) => (
-            <label key={continent}>
-              {continent}
-              <input
-                type="checkbox"
-                value={continent}
-                onChange={handleFilterContinent}
-                checked={continentsFilter.includes(continent)}
-              />
-            </label>
-          ))
-        ) : (
-          <></>
-        )}
+    <div className={style.filterContainer}>
+      <div className={style.subfilterContainer}>
+        <p>Filter By Continents:</p>
+        <div className={style.continents}>
+          {continents.length ? (
+            continents.map((continent) => (
+              <label key={continent} className={style.containerCheck}>
+                {continent}
+                <input
+                  type="checkbox"
+                  value={continent}
+                  onChange={handleFilterContinent}
+                  checked={continentsFilter.includes(continent)}
+                />
+                <span class={style.checkmark}></span>
+              </label>
+            ))
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
-      <label>Filter By Activity:</label>
-      <div>
-        {activities.length ? (
-          activities.map((activity) => (
-            <label key={activity}>
-              {activity}
-              <input
-                type="checkbox"
-                value={activity}
-                onChange={handleFilterActivity}
-                checked={activitiesFilter.includes(activity)}
-              />
-            </label>
-          ))
-        ) : (
-          <></>
-        )}
+      <div className={style.subfilterContainer}>
+        <p>Filter By Activity:</p>
+        <div className={style.activities}>
+          {activities.length ? (
+            activities.map((activity) => (
+              <label key={activity} className={style.containerCheck}>
+                {activity}
+                <input
+                  type="checkbox"
+                  value={activity}
+                  onChange={handleFilterActivity}
+                  checked={activitiesFilter.includes(activity)}
+                />
+                <span class={style.checkmark}></span>
+              </label>
+            ))
+          ) : (
+            <></>
+          )}
+        </div>
       </div>
     </div>
   );

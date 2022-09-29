@@ -1,40 +1,39 @@
 ul{
     padding-left:0;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
     }
-     
+
 li {
     list-style: none;
     display: inline;
     padding-right: 10px;
     }
 
-
-
-
 .title {
     position: relative;
     font-family: 'myFirstFont',cursive;
-    color: rgb(8,77,110);
+    color: rgb(209, 196, 196);
     backdrop-filter: blur(10px);
 }
 
 .buttonNav{
-    display: inline-block;
-    color:black;
+    display: inline-flex;
+    color:rgb(209, 196, 196);
     width: 150px;
     height: 20px;
-    background-color: rgb(84, 107, 134);
+    background-color: rgb(57, 72, 90);
     border-radius: 5px;
+    align-items: center;
+    justify-content: center;
 }
 
 .buttonNav:hover {
     box-shadow: 2px 2px 5px #999;
-
 }
 
-.navContainer{
-    display: inline-flex;
-    justify-content: space-between;
-    /* align-items: center; */
-
+a {
+    text-decoration: none;
 }
+
