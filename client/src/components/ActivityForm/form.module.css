@@ -10,32 +10,104 @@
     height: 445px;
 }
 
-.title {
+.title, .errors {
     position: relative;
     font-family: 'myFirstFont',cursive;
     color: rgb(209, 196, 196);
 }
 
 .container{
-    border: solid 1px white;
+    /* border: solid 1px white; */
     height: auto;
     display: flex;
-    background-color: black;
-}
-
-.formContainer{
-    border: solid 1px white;
-    margin: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(1px);
+    border-radius: 20px;
+    margin: 5px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    padding: 5px;
 }
 
-.countriesContainer{
-    border: solid 1px white;
+
+
+.selectCountry{
+    /* border: solid 1px rgb(0, 255, 183); */
+    margin:5px;
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+    justify-self: center;
+    font-size: 30px;
 }
 
+.selectCountry button, .addActivityButton input{
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 3px;
+    border-radius: 5px ;
+
+}
+
+.selectCountry button:hover, .addActivityButton input:hover{
+    box-shadow: 2px 2px 5px black;
+}
+
+
+.countries{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /* border: solid 1px rgb(179, 255, 0); */
+    margin: 5px;
+}
+.countryCard{
+    display: inline-flex;
+}
+.containerForm{
+    /* border: solid 1px rgb(0, 119, 255); */
+    /* margin: 10px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.subContainerForm{
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    /* border: solid 1px rgb(172, 25, 177); */
+    margin: 5px;
+}
 .labelContainer{
-    border: solid 1px white;
-    margin: 10px;
+    /* border: solid 1px rgb(179, 255, 0); */
+    margin: 5px;
+    display: flex;
+    padding-left: 5px;
+    height: 25px;
+    /* justify-content: space-around; */
+}
+
+.errors{
+    padding-right: 5px;
+}
+
+div[name="duration"] input{
+    width: 50px;
+}
+
+.subtitle{
+    font-style: oblique;
+    padding-right: 10px;
+}
+
+
+.countryCard button{
+    width: fit-content;
+    /* position: relative; */
+
+}
+
+select option{
+    background-color: rgba(0, 0, 0, 0.5);
 }

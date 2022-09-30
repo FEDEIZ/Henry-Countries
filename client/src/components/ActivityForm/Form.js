@@ -1,6 +1,8 @@
 import React from "react";
 import Filter from "../Countries/Paging/Filter";
 import style from "./form.module.css";
+import Country from "../Countries/Country/Country";
+
 const Form = ({
   countries,
   formState,
@@ -14,14 +16,14 @@ const Form = ({
 }) => {
   return (
     <div className={style.container}>
-      <form className={style.formContainer}>
-        <h2 className={style.title}>Create new activity</h2>
-        <div className={style.countriesContainer}>
-          <div className={style.labelContainer}>
-            <label className={style.subtitle}>Add countries</label>
-            <p className={style.errors}>{errors.countriesId}</p>
-          </div>
-          <Filter className={style.filter} />
+      <h2 className={style.title}>Create new activity</h2>
+      <div className={style.countriesContainer}>
+        <div className={style.labelContainer}>
+          <label className={style.subtitle}>Add countries</label>
+          <p className={style.errors}>{errors.countriesId}</p>
+        </div>
+        <Filter className={style.filter} />
+        <div className={style.selectCountry}>
           <select
             className={style.select}
             name="countriesId"
@@ -42,71 +44,75 @@ const Form = ({
             )}
           </select>
           <button onClick={addCountry}>ADD</button>
-          <div>
-            <h4>Countries activity</h4>
-            <div>
-              {formState.countriesAdded.length ? (
-                formState.countriesAdded.map((c) => (
-                  <div key={`${c.id}_activity`}>
-                    <h4>{c.name}</h4>
-                    <img src={c.flagImg} alt={c.name} className={style.flag} />
-                    <button
-                      name="removeCountrie"
-                      onClick={removeCountry}
-                      value={c.id}
-                    >
-                      X
-                    </button>
-                  </div>
-                ))
-              ) : (
-                <h4>Click ADD button to add countries</h4>
-              )}
-            </div>
+        </div>
+        <div className={style.countries}>
+          {formState.countriesAdded.length ? (
+            formState.countriesAdded.map((c) => (
+              <div className={style.countryCard} key={c.id}>
+                <Country
+                  name={
+                    c.name[0] + c.name.slice(1, c.name.length).toLowerCase()
+                  }
+                  continent={
+                    c.continent[0] +
+                    c.continent.slice(1, c.continent.length).toLowerCase()
+                  }
+                  flag={c.flagImg}
+                />
+                <button
+                  name="removeCountrie"
+                  onClick={removeCountry}
+                  value={c.id}
+                >
+                  X
+                </button>
+              </div>
+            ))
+          ) : (
+            <p className={style.errors}>Click ADD button to add countries</p>
+          )}
+        </div>
+      </div>
+
+      <form className={style.containerForm}>
+        <div className={style.subContainerForm}>
+          <div className={style.labelContainer}>
+            <label className={style.subtitle}>Name </label>
+            <p className={style.errors}>{errors.name}</p>
+            <input
+              className={style.input}
+              type="text"
+              name="name"
+              placeholder="Type name for your activity"
+              onChange={handleInputChange}
+              value={formState["name"]}
+            />
+          </div>
+          <br />
+          <div className={style.labelContainer}>
+            <label className={style.subtitle}>Difficulty</label>
+            <p className={style.errors}>{errors.difficulty}</p>
+            <select
+              className={style.select}
+              name="difficulty"
+              onChange={handleInputChange}
+              value={formState.difficulty}
+            >
+              <option value="" disabled hidden>
+                1 - 5
+              </option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
           </div>
         </div>
-        {/* {errors.name && ( //if there some errors it will show <p/>
-          <p className="danger">{errors.name}</p>
-        )} */}
-        <div className={style.labelContainer}>
-          <label className={style.subtitle}>Name </label>
-          <p className={style.errors}>{errors.name}</p>
-          <input
-            className={style.input}
-            type="text"
-            name="name"
-            placeholder="Type name for your activity"
-            onChange={handleInputChange}
-            value={formState["name"]}
-          />
-        </div>
-        <br />
-        <div className={style.labelContainer}>
-          <label className={style.subtitle}>Difficulty</label>
-          <p className={style.errors}>{errors.difficulty}</p>
-          <select
-            className={style.select}
-            name="difficulty"
-            onChange={handleInputChange}
-            value={formState.difficulty}
-          >
-            <option value="" disabled hidden>
-              Difficulty
-            </option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-          </select>
-        </div>
-        {/* {errors.difficulty && ( //if there some errors it will show <p/>
-          <p className="danger">{errors.difficulty}</p>
-        )} */}
-        <br />
-        <div className={style.labelContainer}>
-          <label className={style.subtitle}>Duration</label>
-          <div>
+        <div className={style.subContainerForm}>
+          <div className={style.labelContainer} name="duration">
+            {/* <label className={style.subtitle}>Duration</label> */}
+            <p className={style.errors}>{errors.days}</p>
             <input
               className={style.input}
               type="text"
@@ -115,10 +121,7 @@ const Form = ({
               onChange={handleInputChange}
               value={formState.days}
             ></input>{" "}
-            <p className={style.errors}>{errors.days}</p>
-            {/* {errors.days && ( //if there some errors it will show <p/>
-              <p className="danger">{errors.days}</p>
-            )} */}
+            <p className={style.errors}>{errors.hours}</p>
             <input
               className={style.input}
               type="text"
@@ -127,47 +130,36 @@ const Form = ({
               onChange={handleInputChange}
               value={formState["hours"]}
             />
-            <p className={style.errors}>{errors.hours}</p>
           </div>
-          {/* {errors.hours && ( //if there some errors it will show <p/>
-            <p className="danger">{errors.hours}</p>
-          )} */}
-        </div>
-        <br />
-        <div className={style.labelContainer}>
-          <label className={style.subtitle}>Select season</label>
-          <p className={style.errors}>{errors.season}</p>
-          <select
-            className={style.select}
-            name="season"
-            onChange={handleInputChange}
-            value={formState.season}
-          >
-            <option value="" disabled hidden>
-              Season
-            </option>
-            <option value="Autumn">Autumn</option>
-            <option value="Winter">Winter</option>
-            <option value="Spring">Spring</option>
-            <option value="Summer">Summer</option>
-          </select>
-        </div>
-        <br />
-        {/* {errors.season && ( //if there some errors it will show <p/>
-          <p className="danger">{errors.season}</p>
-        )} */}
-        {/* {errors.countriesId && ( //if there some errors it will show <p/>
-          <p className="danger">{errors.countriesId}</p>
-        )} */}
-        <div className={style.addActivityButton}>
-          <input
-            type="submit"
-            value="Add activity"
-            disabled={enableSubmit(formState)}
-            onClick={handleSumbit}
-          />
+          <br />
+          <div className={style.labelContainer}>
+            {/* <label className={style.subtitle}>Select season</label> */}
+            <p className={style.errors}>{errors.season}</p>
+            <select
+              className={style.select}
+              name="season"
+              onChange={handleInputChange}
+              value={formState.season}
+            >
+              <option value="" disabled hidden>
+                Season
+              </option>
+              <option value="Autumn">Autumn</option>
+              <option value="Winter">Winter</option>
+              <option value="Spring">Spring</option>
+              <option value="Summer">Summer</option>
+            </select>
+          </div>
         </div>
       </form>
+      <div className={style.addActivityButton}>
+        <input
+          type="submit"
+          value="Add activity"
+          disabled={enableSubmit(formState)}
+          onClick={handleSumbit}
+        />
+      </div>
     </div>
   );
 };
