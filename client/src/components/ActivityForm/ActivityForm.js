@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCountries, postActivity, filterCountries } from "./../../actions";
 import Form from "./Form";
 import Nav from "../Nav/Nav";
+import style from "./form.module.css";
 
 const ActivityForm = () => {
   const dispatch = useDispatch();
@@ -155,7 +156,7 @@ const ActivityForm = () => {
   };
 
   return (
-    <div>
+    <div className={style.body}>
       <Nav />
       <Form
         countries={countriesResults}

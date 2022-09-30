@@ -1,0 +1,41 @@
+.body{
+    background-image: url('./../../img/background2.jpg');
+    background-color: #cccccc;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    background-position: center center;
+    width: 862px;
+    height: 445px;
+}
+
+.title {
+    position: relative;
+    font-family: 'myFirstFont',cursive;
+    color: rgb(209, 196, 196);
+}
+
+.container{
+    border: solid 1px white;
+    height: auto;
+    display: flex;
+    background-color: black;
+}
+
+.formContainer{
+    border: solid 1px white;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.countriesContainer{
+    border: solid 1px white;
+}
+
+.labelContainer{
+    border: solid 1px white;
+    margin: 10px;
+}
