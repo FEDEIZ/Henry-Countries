@@ -17,6 +17,10 @@ button{
     font-size: 15px;
 }
 
+button:hover{
+    text-shadow: 1px 1px 2px black;
+}
+
 button:disabled{
     color: rgb(114, 110, 110);
 }

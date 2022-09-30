@@ -32,11 +32,8 @@ const Nav = () => {
             </Link>
           </li>
           <li>
-            <div
-              className={style.buttonNav}
-              onClick={() => dispatch(setComponentShow("countriesActivities"))}
-            >
-              <p>Countries Activities</p>
+            <div className={style.buttonNav}>
+              <p>About</p>
             </div>
           </li>
         </ul>

@@ -9,3 +9,161 @@
     width: 862px;
     height: 445px;
 }
+
+.container{
+    display:flex;
+    flex-direction: column;
+
+    padding-top:20px;
+    justify-content: center;
+    width: 100%;
+}
+
+.containerHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-bottom: 10px;
+}
+
+.flagContainer{
+    width: 100%;  
+}
+
+.container img{
+    position: relative;
+    width: 200px; 
+     height: 133.12px;
+
+    border-radius: 10px;
+    box-shadow: 0px -5px 10px rgb(209, 196, 196);
+}
+
+.title{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    color: rgb(209, 196, 196);
+    text-shadow: 3px 3px 8px rgb(0, 0, 0);
+    
+}
+
+.containerDetails{
+    display: flex;
+    flex-direction: row;
+    /* border: solid 1px rgb(255, 255, 255); */
+}
+.details{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    /* border: solid 1px rgb(255, 255, 255); */
+    padding-left: 40px;
+    text-shadow: 0px 0px 5px rgb(0, 0, 0);
+    justify-content: space-around;
+    backdrop-filter: blur(1px);
+}
+
+.subtitle{
+    /* border: solid 1px rgb(255, 255, 255); */
+    display: flex;
+    flex-direction: column;
+    width: 100%;  
+}
+
+.details p {
+    display: inline-flex;
+    color: rgb(209, 196, 196);
+    
+
+}
+
+.activities{
+    display: flex;
+    flex-direction: column;
+    /* border: solid 1px rgb(255, 255, 255); */
+    width: 100%;
+}
+
+.flipCard {
+    background-color: transparent;
+    width: 250px;
+    height: 70px;
+    /* border: 1px solid #f1f1f1; */
+    perspective: 1000px; /* Remove this if you don't want the 3D effect */
+    border-radius: 5px;
+    box-shadow: 0px -5px 10px rgb(209, 196, 196);
+    color: rgb(209, 196, 196);
+    margin-bottom: 10px;
+  }
+
+.flipCardInner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    text-shadow: 0px 0px 8px rgb(0, 0, 0);
+}
+
+.flipCard:hover .flipCardInner {
+    transform: rotateY(180deg);
+  }
+
+.flipCardFront, .flipCardBack {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: transparent;
+}
+
+.flipCardFront {
+    font-size: 30px;
+  }
+  
+  /* Style the back side */
+  .flipCardBack {
+    transform: rotateY(180deg);
+   
+  }
+
+  .infoActivitie{
+    background-color: rgb(209, 196, 196,0.1);
+    border-radius: 5px;
+  }
+
+  .activities p{
+    color: rgb(209, 196, 196);
+    text-shadow: 0px 0px 10px rgb(0, 0, 0);
+    /* font-size: 20px; */
+  }
+  .noActivity{
+    font-size: 20px;
+  }
+
+  .addButton{
+    display: inline-flex;
+    color:rgb(209, 196, 196);
+    width: 150px;
+    height: 20px;
+    background-color: rgb(57, 72, 90);
+    border-radius: 5px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-shadow: 1px 1px 1px rgb(0,0,0);
+}
+
+.addButton:hover {
+    box-shadow: 2px 2px 5px black;
+}
+
+a {
+    text-decoration: none;
+}

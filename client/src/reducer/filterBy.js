@@ -19,7 +19,8 @@ export const countriesByActivity = (countries, activitiesF) => {
       for (let j = 0; j < countries.length; j++) {
         for (let k = 0; k < countries[j].activities.length; k++) {
           if (
-            activitiesF[i].toUpperCase() === countries[j].activities[k].name
+            activitiesF[i].toUpperCase() ===
+            countries[j].activities[k].name.toUpperCase()
           ) {
             countriesByActivitySet.add(countries[j]);
             break;

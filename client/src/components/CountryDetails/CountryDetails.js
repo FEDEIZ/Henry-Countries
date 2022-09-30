@@ -18,35 +18,87 @@ const CountryDetails = () => {
 
   return (
     <div className={style.body}>
-      <Nav />
-      <div>
-        <h1>{countryDetail.name}</h1>
-        <h3>{countryDetail.id}</h3>
-        <div>
-          <img src={countryDetail.flagImg} alt="No img" />
+      <div className={style.nav}>
+        <Nav />
+      </div>
+      <div className={style.container}>
+        <div className={style.containerHeader}>
+          <div className={style.title}>
+            <h1 className={style.title}>{countryDetail.name}</h1>
+          </div>
+          <div className={style.flagContainer}>
+            <img src={countryDetail.flagImg} alt="No img" />
+          </div>
         </div>
-        <h4>continent: {countryDetail.continent}</h4>
-        <h5>Capital: {countryDetail.capital}</h5>
-        <h5>Area: {countryDetail.area} Km2</h5>
-        <h5>Population: {countryDetail.population} Hab. </h5>
-        <div>
-          {countryDetail["activities"] && countryDetail["activities"].length ? (
-            countryDetail["activities"].map((activities) => (
-              <div key={activities.id}>
-                <h4>{activities.name}</h4>
-                <h4>Season: {activities.season}</h4>
-                <h4>Difficulty: {activities.difficulty}</h4>
-                <h4>Days: {activities.duration[0]}</h4>
-                <h4>Hours: {activities.duration[1]}</h4>
-              </div>
-            ))
-          ) : (
-            <h3>No activities</h3>
-          )}
+        <div className={style.containerDetails}>
+          <div className={style.details}>
+            <div className={style.subtitle}>
+              <p>Code: </p>
+              <p>Continent: </p>
+              <p>Capital: </p>
+              <p>Area: </p>
+              <p>Population: </p>
+            </div>
+            <div className={style.subtitle}>
+              <p>{countryDetail.id}</p>
+              <p>{countryDetail.continent}</p>
+              <p>{countryDetail.capital}</p>
+              <p>{countryDetail.area} Km2</p>
+              <p>{countryDetail.population} People</p>
+            </div>
+          </div>
+          <div className={style.activities}>
+            {countryDetail["activities"] &&
+            countryDetail["activities"].length ? (
+              countryDetail["activities"].map((activities) => (
+                <div key={activities.id} className={style.flipCard}>
+                  <div className={style.flipCardInner}>
+                    <div className={style.flipCardFront}>
+                      <p>
+                        {activities.name[0] +
+                          activities.name
+                            .slice(1, activities.name.length)
+                            .toLowerCase()}
+                      </p>
+                    </div>
+                    <div className={style.flipCardBack}>
+                      <div className={style.infoActivitie}>
+                        <p>Season </p>
+                        <p>
+                          {activities.season[0] +
+                            activities.season
+                              .slice(1, activities.season.length)
+                              .toLowerCase()}
+                        </p>
+                      </div>
+                      <div className={style.infoActivitie}>
+                        <p>Difficulty </p>
+                        <p>{activities.difficulty}</p>
+                      </div>
+                      <div className={style.infoActivitie}>
+                        <p>Days </p>
+                        <p>{activities.duration[0]}</p>
+                      </div>
+                      <div className={style.infoActivitie}>
+                        <p>Hours </p>
+                        <p>{activities.duration[1]}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className={style.noActivity}>No activities added...</p>
+            )}
+          </div>
         </div>
-        <Link to={`/activities?id=${id}`}>
-          <h4>Add or modify activity</h4>
-        </Link>
+        <div>
+          <Link to={`/activities?id=${id}`}>
+            <div className={style.addButton}>
+              <p>Add activity</p>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );

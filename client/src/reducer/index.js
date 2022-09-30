@@ -82,22 +82,22 @@ function rootReducer(state = initialState, action) {
         ...state,
         countriesResults:
           state.activities.length || state.continentsFilter.length
-            ? state.componentShow === "countries"
-              ? [].concat(
-                  filterBy(
-                    [action.payload[0], action.payload[1]],
-                    state.countries
-                  )
+            ? // ? state.componentShow === "countries"
+              [].concat(
+                filterBy(
+                  [action.payload[0], action.payload[1]],
+                  state.countries
                 )
-              : [].concat(
-                  filterBy(
-                    [action.payload[0], action.payload[1]],
-                    state.countriesActivities
-                  )
-                )
-            : state.componentShow === "countries"
-            ? [].concat(state.countries)
-            : [].concat(state.countriesActivities),
+              )
+            : // : [].concat(
+              //     filterBy(
+              //       [action.payload[0], action.payload[1]],
+              //       state.countriesActivities
+              //     )
+              //   )
+              // : state.componentShow === "countries"
+              [].concat(state.countries),
+        // : [].concat(state.countriesActivities),
       };
 
     case SET_ORDER:

@@ -49,7 +49,7 @@ export function Filter() {
                   onChange={handleFilterContinent}
                   checked={continentsFilter.includes(continent)}
                 />
-                <span class={style.checkmark}></span>
+                <span className={style.checkmark}></span>
               </label>
             ))
           ) : (
@@ -70,7 +70,7 @@ export function Filter() {
                   onChange={handleFilterActivity}
                   checked={activitiesFilter.includes(activity)}
                 />
-                <span class={style.checkmark}></span>
+                <span className={style.checkmark}></span>
               </label>
             ))
           ) : (
