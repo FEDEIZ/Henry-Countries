@@ -4,6 +4,7 @@ import { getCountries, postActivity, filterCountries } from "./../../actions";
 import Form from "./Form";
 import Nav from "../Nav/Nav";
 import style from "./form.module.css";
+import { Route } from "react-router-dom";
 
 const ActivityForm = () => {
   const dispatch = useDispatch();
@@ -160,6 +161,8 @@ const ActivityForm = () => {
         countryId: c,
       };
       dispatch(postActivity(activity));
+      alert(`${formState.name} activity created!`);
+      window.location.href = "http://localhost:3000/countries";
     });
   };
 

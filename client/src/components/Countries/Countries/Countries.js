@@ -67,19 +67,6 @@ const Countries = ({ countries }) => {
                 flag={c.flagImg}
               />
             </Link>
-            <div>
-              {c.activities.length ? (
-                <div key={c.id + "_act"}>
-                  {c.activities.map((a) => (
-                    <h5 key={a.name}>
-                      {a.name[0] + a.name.slice(1, a.name.length).toLowerCase()}
-                    </h5>
-                  ))}
-                </div>
-              ) : (
-                <></>
-              )}
-            </div>
           </div>
         ))}
       </div>
