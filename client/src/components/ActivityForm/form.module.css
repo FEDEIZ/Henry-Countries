@@ -10,14 +10,14 @@
     height: 445px;
 }
 
-.title, .errors {
+.title {
     position: relative;
     font-family: 'myFirstFont',cursive;
     color: rgb(209, 196, 196);
 }
 
 .container{
-    /* border: solid 1px white; */
+
     height: auto;
     display: flex;
     background-color: rgba(0, 0, 0, 0.5);
@@ -30,66 +30,83 @@
     padding: 5px;
 }
 
+.filter{
 
-
-.selectCountry{
-    /* border: solid 1px rgb(0, 255, 183); */
-    margin:5px;
-    display: flex;
-    justify-content: space-around;
-    width: 50%;
-    justify-self: center;
-    font-size: 30px;
+    margin: 1px;
 }
 
-.selectCountry button, .addActivityButton input{
+
+.containerForm{
+    display: flex;
+}
+
+.form button, .addActivityButton input{
     background-color: rgba(0, 0, 0, 0.7);
     padding: 3px;
     border-radius: 5px ;
 
 }
 
-.selectCountry button:hover, .addActivityButton input:hover{
+.form button:hover, .addActivityButton input:hover{
     box-shadow: 2px 2px 5px black;
 }
 
 
-.countries{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    /* border: solid 1px rgb(179, 255, 0); */
-    margin: 5px;
-}
-.countryCard{
-    display: inline-flex;
-}
-.containerForm{
-    /* border: solid 1px rgb(0, 119, 255); */
-    /* margin: 10px; */
+.form{
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
+    width: 50%;
+    height: 150px;
 }
+
+.form select, .form button{
+    width: max-content;
+}
+
 .subContainerForm{
     display: inline-flex;
     flex-direction: row;
-    justify-content: center;
-    /* border: solid 1px rgb(172, 25, 177); */
     margin: 5px;
 }
 .labelContainer{
-    /* border: solid 1px rgb(179, 255, 0); */
-    margin: 5px;
     display: flex;
-    padding-left: 5px;
+    padding-right: 10px;
     height: 25px;
-    /* justify-content: space-around; */
+}
+
+.labelContainer input[name='days']{
+
+    margin-right: 10px;
+}
+.countries{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 50%;
+
+}
+.countryCard{
+    display: inline-flex;
+    font-size: 15px;    
+}
+
+.countries .errors{
+    justify-self: center;
+    align-self: center;
+    position: relative;
+    top: -35px;
+    font-size: 10px;
 }
 
 .errors{
     padding-right: 5px;
+    font-size: 10px;
+    color:red;
+    text-shadow: 1px 1px black;
 }
 
 div[name="duration"] input{
@@ -102,12 +119,12 @@ div[name="duration"] input{
 }
 
 
-.countryCard button{
-    width: fit-content;
-    /* position: relative; */
-
+.addActivityButton input:disabled {
+    background-color: rgb(84, 85, 85,0.5);
+    box-shadow: none;
 }
 
 select option{
     background-color: rgba(0, 0, 0, 0.5);
 }
+

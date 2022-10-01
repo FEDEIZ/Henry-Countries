@@ -122,7 +122,7 @@ const ActivityForm = () => {
       errors.hours = "Hours must be a number beetween 0 and 23";
 
     if (input.days === "0" && input.hours === "0")
-      errors.days = "At least days or hours must be complete";
+      errors.days = "At least days or hours must be greater than zero";
 
     if (!input.season) errors.season = "*";
     if (!input.countriesId.length) errors.countriesId = "*";
