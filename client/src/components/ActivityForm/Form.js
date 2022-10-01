@@ -14,6 +14,7 @@ const Form = ({
   enableSubmit,
   handleSumbit,
 }) => {
+  console.log(errors);
   return (
     <div className={style.container}>
       <h2 className={style.title}>Create new activity</h2>
@@ -164,6 +165,13 @@ const Form = ({
               ))
             ) : (
               <p className={style.errors}>Click ADD button to add countries</p>
+            )}
+            {errors.countries ? (
+              <p className={style.errors} name="countries">
+                {errors.countries}
+              </p>
+            ) : (
+              <></>
             )}
           </div>
         </div>

@@ -70,7 +70,8 @@ const ActivityForm = () => {
     e.preventDefault();
     if (
       formState.countrySelected &&
-      !formState.countriesId.find((idC) => idC === formState.countrySelected)
+      !formState.countriesId.find((idC) => idC === formState.countrySelected) &&
+      formState.countriesAdded.length < 6
     ) {
       setFormState({
         ...formState,
@@ -90,6 +91,7 @@ const ActivityForm = () => {
   };
 
   const removeCountry = (e) => {
+    setErrors(validate(formState));
     e.preventDefault();
     setFormState({
       ...formState,
@@ -98,6 +100,7 @@ const ActivityForm = () => {
       ),
       countriesId: formState.countriesId.filter((id) => id !== e.target.value),
     });
+    console.log(formState.countriesAdded.length);
   };
 
   const validate = (input) => {
@@ -126,6 +129,11 @@ const ActivityForm = () => {
 
     if (!input.season) errors.season = "*";
     if (!input.countriesId.length) errors.countriesId = "*";
+
+    if (input.countriesAdded.length === 6) {
+      console.log(input.countriesAdded.length);
+      errors.countries = "¡Max countries added!";
+    }
     return errors;
   };
 

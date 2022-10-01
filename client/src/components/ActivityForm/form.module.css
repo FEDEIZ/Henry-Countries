@@ -87,6 +87,8 @@
     flex-wrap: wrap;
     justify-content: flex-start;
     width: 50%;
+    height: 220px;
+    /* border: solid 1px white; */
 
 }
 .countryCard{
@@ -98,8 +100,15 @@
     justify-self: center;
     align-self: center;
     position: relative;
-    top: -35px;
+    top: -65px;
     font-size: 10px;
+}
+
+.countries .errors[name='countries']{
+    font-size: 15px; 
+    right: 150px;
+    top: -100px;
+    z-index: 1;
 }
 
 .errors{
