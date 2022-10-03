@@ -18,7 +18,9 @@ const postActivity = async (req, res) => {
     } else res.send("No country found");
   } catch (err) {
     console.log(err.message);
-    res.status(404).send(err.message);
+    res
+      .status(400)
+      .send(`The activity ${name} already exist. Try with another name!`);
   }
 };
 

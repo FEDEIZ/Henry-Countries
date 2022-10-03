@@ -122,9 +122,12 @@ export function postActivity(activity) {
         `${REACT_APP_API_URL}/activities`,
         activity
       );
-      console.log(newActivity);
+      // console.log(newActivity);
+      alert(`${activity.name} activity created!`);
+      window.location.href = "http://localhost:3000/countries";
     } catch (err) {
-      console.log(err.message);
+      console.log(err.response.data);
+      alert(err.response.data);
     }
   };
 }

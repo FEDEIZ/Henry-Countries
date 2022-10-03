@@ -160,8 +160,8 @@ const ActivityForm = () => {
         countryId: c,
       };
       dispatch(postActivity(activity));
-      alert(`${formState.name} activity created!`);
-      window.location.href = "http://localhost:3000/countries";
+      // alert(`${formState.name} activity created!`);
+      // window.location.href = "http://localhost:3000/countries";
     });
   };
 
