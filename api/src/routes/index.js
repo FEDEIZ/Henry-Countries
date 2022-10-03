@@ -11,5 +11,5 @@ router.use(json());
 
 router.use("/countries", countryRoutes);
 router.use("/activities", activityRoutes);
-
+router.all("*", (req, res) => res.redirect("/"));
 module.exports = router;

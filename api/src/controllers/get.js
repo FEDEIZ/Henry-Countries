@@ -8,7 +8,7 @@ const getCountries = async (req, res) => {
   try {
     if (!name) {
       const allCountries = await Country.findAll({
-        include: Activity
+        include: Activity,
       });
       res.json(allCountries);
     } else {
@@ -24,7 +24,7 @@ const getCountries = async (req, res) => {
     }
     //console.log(allCountries);
   } catch (err) {
-    res.send(err.message);
+    res.send("Cant charge countries. Try again!");
   }
 };
 
@@ -38,7 +38,7 @@ const getCountryById = async (req, res) => {
     res.json(countryFound);
   } catch (err) {
     console.log(err.message);
-    res.status(400).send(err.message);
+    res.status(400).send("Cant find the country with id " + idCountry);
   }
 };
 

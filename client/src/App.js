@@ -13,6 +13,7 @@ function App() {
       <Route exact path="/countries" component={Main} />
       <Route path="/activities" component={ActivityForm} />
       <Route exact path="/countries/:id" component={CountryDetails} />
+      <Route path="*" component={Landing} />
     </div>
   );
 }

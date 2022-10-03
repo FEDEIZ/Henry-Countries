@@ -29,10 +29,12 @@ export function getCountries() {
       });
     } catch (err) {
       console.log(err.message);
-      return dispatch({
-        type: GET_COUNTRIES,
-        payload: err.message,
-      });
+      // return dispatch({
+      //   type: GET_COUNTRIES,
+      //   payload: err.response.data,
+      // });
+      alert(err.response.data);
+      window.location.href = "http://localhost:3000";
     }
   };
 }
