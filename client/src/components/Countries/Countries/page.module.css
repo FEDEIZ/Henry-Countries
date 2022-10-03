@@ -24,3 +24,9 @@ button:hover{
 button:disabled{
     color: rgb(114, 110, 110);
 }
+
+.actualPage{
+    color: rgb(209, 196, 196);
+    font-size: 15px;
+    text-shadow: 1px 1px 2px black;
+}

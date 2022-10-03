@@ -40,6 +40,7 @@ export function Page({ handlePageChange, actualPage, totalPages }) {
           {">>"}
         </button>
       </div>
+      <div className={style.actualPage}>{actualPage}</div>
     </div>
   );
 }
