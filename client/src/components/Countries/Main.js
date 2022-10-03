@@ -2,7 +2,6 @@ import Countries from "./Countries/Countries.js";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Nav from "../Nav/Nav.js";
-import { useLocation } from "react-router-dom";
 import {
   getCountries,
   getCountriesActivities,
@@ -40,7 +39,7 @@ export function Main() {
       await applyOrder(orderSet);
     }
     initial();
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     return () => {
@@ -50,7 +49,7 @@ export function Main() {
       dispatch(getCountries());
       applyOrder(orderSet);
     };
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     refresh(countrySearch.value);
@@ -63,6 +62,7 @@ export function Main() {
         return;
       case ALPHA_DESC:
         dispatch(order("DESC", "name"));
+        return;
       case POP_ASC:
         dispatch(order("ASC", "population"));
         return;

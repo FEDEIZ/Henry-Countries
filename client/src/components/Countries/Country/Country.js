@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  countryCard,
-  flagStyle,
-  title,
-  continentTitle,
-} from "./country.module.css";
+import { countryCard, flagStyle, title } from "./country.module.css";
 
 const Country = ({ flag, name, continent }) => {
   return (

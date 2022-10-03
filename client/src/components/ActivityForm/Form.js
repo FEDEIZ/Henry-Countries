@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Filter from "../Countries/Paging/Filter";
 import style from "./form.module.css";
 import Country from "../Countries/Country/Country";
@@ -14,7 +14,6 @@ const Form = ({
   enableSubmit,
   handleSumbit,
 }) => {
-  console.log(errors);
   return (
     <div className={style.container}>
       <h2 className={style.title}>Create new activity</h2>

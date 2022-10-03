@@ -4,7 +4,6 @@ import { getCountries, postActivity, filterCountries } from "./../../actions";
 import Form from "./Form";
 import Nav from "../Nav/Nav";
 import style from "./form.module.css";
-import { Route } from "react-router-dom";
 
 const ActivityForm = () => {
   const dispatch = useDispatch();
@@ -28,7 +27,7 @@ const ActivityForm = () => {
 
   useEffect(() => {
     if (!countriesResults.length) dispatch(getCountries());
-  }, []);
+  }, [countriesResults.length, dispatch]);
 
   useEffect(() => {
     if (countriesResults.length)
@@ -43,7 +42,7 @@ const ActivityForm = () => {
 
   useEffect(() => {
     dispatch(filterCountries(continentsFilter, activities));
-  }, [continentsFilter, activities]);
+  }, [continentsFilter, activities, dispatch]);
 
   const selectedChange = (e) => {
     e.preventDefault();

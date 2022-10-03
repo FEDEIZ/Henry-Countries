@@ -3,15 +3,11 @@ import { Link } from "react-router-dom";
 import Country from "../Country/Country";
 import Page from "./Page.js";
 import { containerCountries } from "./countries.module.css";
-// import { useSelector, useDispatch } from "react-redux";
-// import { deleteActivity } from "../../../actions";
 
 const Countries = ({ countries }) => {
   const [countriesPerPage, setCountriesPerPage] = useState([]);
   const [actualPage, setActualPage] = useState(0);
   var totalPages = Math.round(countries.length / 10);
-
-  //const dispatch = useDispatch();
 
   useEffect(() => {
     totalPages = Math.round(countries.length / 10);
@@ -40,10 +36,6 @@ const Countries = ({ countries }) => {
         return;
     }
   };
-
-  // const deleteActivityHandle = (e) => {
-  //   dispatch(deleteActivity(e.target.value));
-  // };
 
   return countries.length ? (
     <div>
